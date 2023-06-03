@@ -1,124 +1,49 @@
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+
 #include <iostream>
-#include <fstream>
-#include <memory>
-#include <cmath>
-#include <filesystem>
+#include <experimental/filesystem>
+#include <vector>
+#include <string>
 
-using std::cout;
+namespace fs = std::experimental::filesystem;
 
-inline int char_to_decimal(char chr){
-    int dec = chr;
-    if(dec < 0)
-        dec += 256;
-    return dec;
+
+std::vector<std::string> infoAboutPath(std::string path);
+std::vector<std::string> bypassDirectory(std::string path_string);
+
+
+int main(int argc, char** argv)
+{
+	for (auto i : infoAboutPath("test_file.txt")) std::cout << i << std::endl;
+	for (auto i : bypassDirectory("C:/Users/CYBORG/Desktop/secret_project")) std::cout << i << std::endl;
+
+	return 0;
 }
 
-class Signature
-{
-public:
-    Signature(std::string filename) {
-        this->filename = filename;
-        file1.open(this->filename, std::ios::in | std::ios::binary);
-    }
 
-    ~Signature() {
-        this->file1.close();
+std::vector<std::string> infoAboutPath(std::string path) {  // Принимает путь до файла и выводит информацию о нем
+	fs::path pathObj{ path };
+	std::vector<std::string> result;
 
-        delete[] MS_DOS_HEADER_BUFFER;
-        delete[] PE_HEADER_BUFFER;
-        delete[] SIGNATURE_ANALYSIS;
-    }
+	result.push_back(pathObj.root_name().string());
+	result.push_back(pathObj.root_path().string());
+	result.push_back(pathObj.relative_path().string());
+	result.push_back(pathObj.filename().string());
+	result.push_back(pathObj.stem().string());
+	result.push_back(pathObj.extension().string());
 
-    int* getMS_DOS_HEADER() { // returns int[64] with decimal values of file bytes
-        file1.seekg(0, std::ios::beg);
-        char current_byte;
-        int iter{0};
-        //cout<<"\nDOS HEADER\n";
-        while (iter < 64) {
-            if(!file1.get(current_byte))
-                throw std::invalid_argument{"Can't read the file!"};
-            //cout<<current_byte<<" ";
-            MS_DOS_HEADER_BUFFER[iter] = char_to_decimal(current_byte);
-            iter++;
-        }
-        //cout<<"END OF DOS\n";
-        return MS_DOS_HEADER_BUFFER;
-    }
-
-    int getPE_offset(){
-        //cout<<"\nREADING PE_offset\n";
-        int* dos_header = this->getMS_DOS_HEADER(); // size is 64
-        int offset = 0;
-        for(int i = 60; i < 64; i++){
-            offset += pow(256, i - 60) * dos_header[i];
-        }
-        //cout<<"END of PE_offset\n";
-        return offset;
-    }
+	return result;
+}
 
 
+std::vector<std::string> bypassDirectory(std::string path_string) {  // Принимает путь до каталога и рекурсивно выводит все файлы и каталоги, находящиеся в нем
+	fs::path pathdir{ path_string };
+	fs::recursive_directory_iterator iterDir{ pathdir };
+	std::vector<std::string> result_base_path;
 
+	for (auto iterElementDir : iterDir) {
+		result_base_path.push_back(iterElementDir.path().string());
+	}
 
-    int* getPE_HEADER() { // 24 bytes 4 - signature, 20 - other info
-        int offset = getPE_offset();
-        file1.seekg(offset, std::ios::beg);
-
-        char current_byte;
-        int iter{0};
-        cout<<"PE IS: \n";
-        while (iter < 24) {
-            if(!file1.get(current_byte))
-                throw std::invalid_argument{"Can't read the file!"};
-            PE_HEADER_BUFFER[iter] = char_to_decimal(current_byte);
-            cout<<std::hex<<PE_HEADER_BUFFER[iter]<<" ";
-            iter++;
-        }
-        cout<<"\nPE END \n";
-
-        return PE_HEADER_BUFFER;
-    }
-
-    void print(int pos, int cnt){
-        file1.seekg(pos, std::ios::beg);
-        cout<<"START print in "<<pos<<" "<<cnt<<std::endl;
-        while(cnt--){
-            char byte;
-            file1.get(byte);
-            cout<<byte<<" ";
-        }
-        cout<<"END of print\n";
-    }
-
-private:
-    int pe_cur{0};
-
-    std::string filename;
-    std::ifstream file1;
-    int* MS_DOS_HEADER_BUFFER = new int[64];
-    int* PE_HEADER_BUFFER = new int[24];
-    int* SIGNATURE_ANALYSIS = new int[300];
-};
-
-
-int main(int argc, char** argv) {
-    std::cout << "START" << std::endl;
-
-
-    Signature sig1("gamemd.exe");
-    int x = sig1.getPE_offset();
-    sig1.print(x, 2);
-    int* pe = sig1.getPE_HEADER();
-    cout<<pe[6]<<" "<<pe[7];
-
-    Signature sig2("test_virus.exe");
-    sig2.getPE_offset();
-    x = sig2.getPE_offset();
-    sig2.print(x, 2);
-    pe = sig2.getPE_HEADER();
-    cout<<pe[6]<<" "<<pe[7];
-
-    std::cout << std::endl << "END OF SCAN" << std::endl;
-
-
-    return 0;
+	return result_base_path;
 }
