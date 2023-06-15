@@ -1,24 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include <memory>
 #include <cmath>
 #include <filesystem>
 #include <string>
 #include <cstring>
 #include <algorithm>
 #include "sha256/sha256.h"
+#include "sqllite/sqlite3.h"
 #include <vector>
 
 using std::cout;
-
-inline int char_to_decimal(char chr){
-    int dec = chr;
-    if(dec < 0)
-        dec += 256;
-    return dec;
-}
-
-
 
 class Signature
 {
@@ -26,6 +17,8 @@ public:
     Signature(std::string filename) {
         this->filename = filename;
         file.open(this->filename, std::ios::in | std::ios::binary);
+        if(!file.is_open())
+            throw std::ifstream::failure{"No such file" + filename};
         this->read_MS_DOS_HEADER();
         this->read_PE_HEADER();
     }
@@ -35,19 +28,6 @@ public:
         MS_DOS_HEADER_BUFFER.clear();
         PE_HEADER_BUFFER.clear();
     }
-
-
-    void read_MS_DOS_HEADER() { // init vector[64] of unsigned chars
-        MS_DOS_HEADER_BUFFER = std::vector<unsigned char>(64);
-        file.seekg(0, std::ios::beg);
-
-        if(!file.read(reinterpret_cast<char*>(MS_DOS_HEADER_BUFFER.data()), 64))
-            throw std::invalid_argument{"Can't read the file!"};
-
-        if(MS_DOS_HEADER_BUFFER[0] != 0x4d || MS_DOS_HEADER_BUFFER[1] != 0x5a)
-            throw std::invalid_argument{"The file is not EXE!"};
-    }
-
 
 
     int get_PE_offset(){ // returns the position of PE header in file
@@ -61,32 +41,7 @@ public:
         return offset;
     }
 
-
-
-    void read_PE_HEADER() { // 24 bytes 4 - signature, 20 - other info
-        int offset = get_PE_offset();
-        file.seekg(offset, std::ios::beg);
-
-        PE_HEADER_BUFFER = std::vector<unsigned char>(24);
-        if(!file.read(reinterpret_cast<char*>(PE_HEADER_BUFFER.data()), 24))
-            throw std::invalid_argument{"Can't read the file!"};
-
-        cout<<"PE IS: \n";
-
-        int iter = 0;
-        while (iter < 24) {
-            cout<<(int)PE_HEADER_BUFFER[iter]<<" ";
-            iter++;
-        }
-        cout<<"\nPE END \n";
-
-        if(PE_HEADER_BUFFER[0] != 0x50 || PE_HEADER_BUFFER[1] != 0x45 || PE_HEADER_BUFFER[2] != 0 || PE_HEADER_BUFFER[3] != 0)
-            throw std::invalid_argument{"Can't read the PE header! Probably it is missing."};
-    }
-
-
-
-    int getSections_offset(){
+    int get_Sections_offset(){
         int offset = get_PE_offset() + 24; // offset of Optional Header
         // 21 and 22 - bytes of optional header size
         offset += PE_HEADER_BUFFER[20] + PE_HEADER_BUFFER[21] * 256;
@@ -106,16 +61,13 @@ public:
             file.seekg(pos, std::ios::beg);
         cout<<"START print in "<<pos<<" "<<cnt<<std::endl;
 
-        char * buffer = new char[cnt];
-        unsigned char * bytes_buffer = new unsigned char[cnt];
-        if(!file.readsome(buffer, cnt))
-            throw std::invalid_argument{"Can't read the file!"};
-        std::transform(buffer, buffer + cnt, bytes_buffer, [](char c){return static_cast<unsigned char>(c);});
-        for(int i = 0; i < cnt; i++)
-            std::cout<<(int)bytes_buffer[i]<<' ';
+        std::vector<unsigned char> buff(cnt);
+        if(!file.read(reinterpret_cast<char*>(buff.data()), cnt))
+            throw std::ifstream::failure{"Can't read the file!"};
+        for(unsigned i = 0; i < cnt; i++)
+            std::cout<<(int)buff[i]<<' ';
         cout<<"\nEND of print\n";
     }
-
 
 
     int sum_up_bytes(unsigned short size, int pos=-1){
@@ -129,17 +81,15 @@ public:
         for(int i = 0; i < 4; i++){
             char byte;
             if(!file.get(byte))
-                throw std::invalid_argument{"Can't read the file!"};
+                throw std::ifstream::failure{"Can't read the file!"};
             res += static_cast<unsigned char>(byte) * pow(256, i);
         }
 
         return res;
     }
 
-
-
-    void get_hash(){
-        int start = getSections_offset();
+    std::string get_hash(){
+        int start = get_Sections_offset();
         file.seekg(start, std::ios::beg);
         std::string target = ".text\0\0";
 
@@ -157,16 +107,51 @@ public:
                 file.read(reinterpret_cast<char*>(raw_data.data()), size_of_raw_data);
                 std::string str(raw_data.begin(), raw_data.end());
                 std::string sha = sha256(str);
-                std::cout<<sha<<std::endl;
-                
+                //std::cout<<sha<<std::endl;
+
+                return sha;
             }
             file.seekg(start + (i + 1) * 40, std::ios::beg); // moving to the next section
         }
+
+        return "None";
     }
 
 
 
 private:
+
+    void read_MS_DOS_HEADER() { // init vector[64] of unsigned chars
+        MS_DOS_HEADER_BUFFER = std::vector<unsigned char>(64);
+        file.seekg(0, std::ios::beg);
+
+        if(!file.read(reinterpret_cast<char*>(MS_DOS_HEADER_BUFFER.data()), 64))
+            throw std::ifstream::failure{"Can't read the file!"};
+
+        if(MS_DOS_HEADER_BUFFER[0] != 0x4d || MS_DOS_HEADER_BUFFER[1] != 0x5a)
+            throw std::invalid_argument{"The file is not EXE!"};
+    }
+
+    void read_PE_HEADER() { // 24 bytes 4 - signature, 20 - other info
+        int offset = get_PE_offset();
+        file.seekg(offset, std::ios::beg);
+
+        PE_HEADER_BUFFER = std::vector<unsigned char>(24);
+        if(!file.read(reinterpret_cast<char*>(PE_HEADER_BUFFER.data()), 24))
+            throw std::ifstream::failure{"Can't read the file!"};
+
+        cout<<"PE IS: \n";
+
+        int iter = 0;
+        while (iter < 24) {
+            cout<<(int)PE_HEADER_BUFFER[iter]<<" ";
+            iter++;
+        }
+        cout<<"\nPE END \n";
+
+        if(PE_HEADER_BUFFER[0] != 0x50 || PE_HEADER_BUFFER[1] != 0x45 || PE_HEADER_BUFFER[2] != 0 || PE_HEADER_BUFFER[3] != 0)
+            throw std::invalid_argument{"Can't find the PE header! Probably it is missing."};
+    }
 
     std::string filename;
     std::ifstream file;
@@ -176,22 +161,24 @@ private:
 
 
 
+int main() {
 
+    sqlite3* db;
+    sqlite3_stmt* stmt;
+    sqlite3_open("myDb.db", &db);
 
-int main(int argc, char** argv) {
-
-    std::cout<<"START OF SCAN\n";
+    /*std::cout<<"START OF SCAN\n";
 
     std::string name;
     std::cin>>name;
     Signature sig2(name);
 
-    int x = sig2.getSections_offset();
+    int x = sig2.get_Sections_offset();
     std::cout<<"The offset is "<<x<<std::endl;
     sig2.print(x, 100);
     sig2.get_hash();
 
-    std::cout << std::endl << "END OF SCAN" << std::endl;
+    std::cout << std::endl << "END OF SCAN" << std::endl;*/
 
 
     return 0;
