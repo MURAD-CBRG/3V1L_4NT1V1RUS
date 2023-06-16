@@ -12,7 +12,7 @@ SOURCES += \
     addfiletodbdialog.cpp \
     analizerseparated.cpp \
     configuredialog.cpp \
-    db_manager/database_api.cpp \
+    database_api.cpp \
     dir_reader.cpp \
     main.cpp \
     antiviruswindow.cpp \
@@ -29,7 +29,7 @@ HEADERS += \
     antiviruswindow.h \
     bypass.h \
     configuredialog.h \
-    db_manager/database_api.h \
+    database_api.h \
     dir_reader.h \
     signature.h \
     sqllite/sqlite3ext.h \

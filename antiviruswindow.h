@@ -10,7 +10,7 @@
 #include <QThread>
 
 #include "signature.h"
-#include "db_manager/database_api.h"
+#include "database_api.h"
 #include "conf.h"
 #include "analizerseparated.h"
 #include "dir_reader.h"

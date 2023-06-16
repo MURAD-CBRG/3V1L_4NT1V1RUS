@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "db_manager/database_api.h"
+#include "database_api.h"
 #include "signature.h"
 
 namespace Ui {
