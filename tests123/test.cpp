@@ -97,3 +97,44 @@ TEST_CASE("setConfigurationAnalysis writes valid configuration to file") {
     std::getline(file, line);
     REQUIRE(line == "dir2");
 }
+
+
+
+
+
+TEST_CASE("database_control performs FIND action correctly with empty database") {
+    std::string hash = "666";
+
+    bool result = database_control(hash, "FIND");
+
+    REQUIRE_FALSE(result);
+}
+
+
+TEST_CASE("database_control performs ADD and FIND actions correctly") {
+    std::string hash = "666_new";
+
+    bool result_add = database_control(hash, "ADD");
+    bool result_find_existing = database_control(hash, "FIND");
+    bool result_find_nonexisting = database_control("nonexistent_hash", "FIND");
+
+    REQUIRE(result_add);
+    REQUIRE(result_find_existing);
+    REQUIRE_FALSE(result_find_nonexisting);
+}
+
+
+TEST_CASE("database_control performs DELETE and FIND actions correctly") {
+    std::string hash = "666";
+
+    bool result_add = database_control(hash, "ADD");
+    bool result_delete_existing = database_control(hash, "DELETE");
+    bool result_delete_nonexisting = database_control("IAMSHADOW", "DELETE");
+    bool result_find_deleted = database_control(hash, "FIND");
+
+    REQUIRE(result_add);
+    REQUIRE(result_delete_existing);
+    REQUIRE_FALSE(result_delete_nonexisting);
+    REQUIRE_FALSE(result_find_deleted);
+}
+
