@@ -4,9 +4,12 @@
 #include <string>
 #include <iostream>
 
+int amount_callback{ 0 };
 
 static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
     int i;
+    
+    amount_callback++;
 
     for (i = 0; i < argc; i++) {
         std::cout << argv[i] << std::endl;
@@ -19,14 +22,13 @@ static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
 
 
 
-
 bool search_by_signature(std::string virus_hash) {
    sqlite3 *db;
    int rc;  // commander of database
    char* error_msg = 0;
    std::string sql;
    const char* data = "Callback function called";
-   bool flag{ true };
+   bool flag{ false };
 
    /* Open database */
    rc = sqlite3_open("virus_test_database.db", &db);
@@ -40,8 +42,14 @@ bool search_by_signature(std::string virus_hash) {
 
    sql = "SELECT * FROM viruses WHERE hash='" + virus_hash + "'";
 
+   int last_amount_callback{ amount_callback };
+
    rc = sqlite3_exec(db, const_cast<char*>(sql.c_str()), callback, (void*)data, &error_msg);
-   
+
+   if (last_amount_callback == amount_callback) {
+       return false;
+   }
+
    if( rc != SQLITE_OK ) {
         std::cout << "not ok" << std::endl;
         
