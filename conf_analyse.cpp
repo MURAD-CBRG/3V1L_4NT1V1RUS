@@ -41,6 +41,20 @@ ConfigurationAnalyse getConfigurationForAnalysis()
 }
 
 
+bool setConfigurationAnalysis(ConfigurationAnalyse conf)
+{
+    std::ofstream file("conf_analyse.conf");
+    
+    file << std::to_string(conf.work_flag) << std::endl;
+    file << std::to_string(conf.time_interval) << std::endl;
+    
+    for (std::string curPath : conf.baseDirs) {
+        file << curPath << std::endl;
+    }
+
+    file.close();
+}
+
 //int main(int argc, char** argv) {
 //    ConfigurationAnalyse conf = getConfigurationForAnalysis();
 //
