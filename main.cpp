@@ -1,15 +1,17 @@
 #include "antiviruswindow.h"
-#include "test.h"
 
 #include <QApplication>
+#include <QSystemTrayIcon>
+#include <QMenu>
+#include <QDebug>
+
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     AntivirusWindow w;
     w.show();
 
-    abc();
-
-    return a.exec();
+    return app.exec();
 }
