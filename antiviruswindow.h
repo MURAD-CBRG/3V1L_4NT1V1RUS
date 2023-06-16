@@ -9,12 +9,13 @@
 #include <QFileDialog>
 #include <QThread>
 
-#include "antivirus.h"
+#include "signature.h"
 #include "bypass.h"
 #include "addfiletodbdialog.h"
 #include "db_manager/database_api.h"
 #include "conf.h"
 #include "analizerseparated.h"
+#include "dir_reader.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AntivirusWindow; }

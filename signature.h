@@ -1,5 +1,5 @@
-#ifndef ANTIVIRUS_H
-#define ANTIVIRUS_H
+#ifndef SIGNATURE_H
+#define SIGNATURE_H
 
 #include <iostream>
 #include <fstream>

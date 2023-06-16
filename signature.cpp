@@ -1,4 +1,4 @@
-#include "antivirus.h"
+#include "signature.h"
 
 
 Signature::Signature(std::string filename) {

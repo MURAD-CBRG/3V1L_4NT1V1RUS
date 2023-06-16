@@ -1,14 +1,18 @@
 #include "analizerseparated.h"
 
-analizerSeparated::analizerSeparated(QString name, int interval_seconds, std::vector<std::string> dirs) :
+analizerSeparated::analizerSeparated(QString name,
+                                     int interval_seconds,
+                                     std::vector<std::string> dirs,
+                                     QTextEdit* redactor) :
     name(name),
     interval_seconds(interval_seconds),
-    dirs(dirs) {}
+    dirs(dirs),
+    redactor(redactor) {}
 
-void analizerSeparated::do_something(){
+void analizerSeparated::analize_for_intervals(){
     while(true){
-        for(auto s: dirs){
-            std::cout<<s<<std::endl;
+        for(std::string s: dirs){
+            read_dir(s, redactor);
             if (QThread::currentThread()->isInterruptionRequested())
                 return;
         }

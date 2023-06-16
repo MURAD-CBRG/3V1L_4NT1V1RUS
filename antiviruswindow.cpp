@@ -25,9 +25,10 @@ AntivirusWindow::AntivirusWindow(QWidget *parent)
         ConfigurationAnalyse conf = getConfigurationForAnalysis();
         if(conf.work_flag){
             QThread* thread = new QThread(this);
-            analizerSeparated* t1 = new analizerSeparated("t1", conf.time_interval, conf.baseDirs);
+            QTextEdit* main_log = findChild<QTextEdit*>("logging");
+            analizerSeparated* t1 = new analizerSeparated("t1", conf.time_interval, conf.baseDirs, main_log);
             t1->moveToThread(thread);
-            connect(thread, &QThread::started, t1, &analizerSeparated::do_something);
+            connect(thread, &QThread::started, t1, &analizerSeparated::analize_for_intervals);
 
             // Start the thread
             thread->start();
@@ -54,27 +55,7 @@ void AntivirusWindow::on_checkDirButton_clicked()
 {
     QLineEdit* lineEdit = this->findChild<QLineEdit*>("dirnameLine");
     QTextEdit* textEdit = this->findChild<QTextEdit*>("logging");
-    QString dirname = lineEdit->text();
-    std::vector<std::string> files = bypassDirectory(dirname.toStdString());
-    for(auto filename: files){
-        try{
-            Signature sig1{filename};
-            std::string sig_hash = sig1.get_hash();
-
-            if(database_control(sig_hash, "FIND"))
-                textEdit->append(tr("<font color=\"red\">This file is a virus ") +
-                                          QString::fromStdString(filename) + tr("</font>"));
-            else
-                textEdit->append(tr("This file is clear ") +
-                                          QString::fromStdString(filename));
-        }
-        catch(std::ifstream::failure){
-            QMessageBox::critical(this, "No such file!", "Can't check that file!\n" + QString::fromStdString(filename));
-        }
-        catch(std::invalid_argument){
-            QMessageBox::information(this, "Not exe!", "This file is not EXE!\n" + QString::fromStdString(filename));
-        }
-    }
+    read_dir(lineEdit->text().toStdString(), textEdit);
 }
 
 

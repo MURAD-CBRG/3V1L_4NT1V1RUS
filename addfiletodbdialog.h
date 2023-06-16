@@ -6,7 +6,7 @@
 #include <QMessageBox>
 
 #include "db_manager/database_api.h"
-#include "antivirus.h"
+#include "signature.h"
 
 namespace Ui {
 class addFIleToDBDialog;
