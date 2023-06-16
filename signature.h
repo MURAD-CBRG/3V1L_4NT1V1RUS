@@ -52,13 +52,6 @@ public:
     int get_number_of_sections();
 
     /**
-     * \brief Prints the first `cnt` bytes starting from the given position.
-     * \param cnt The number of bytes to print.
-     * \param pos The position to start printing from.
-     */
-    void print(unsigned cnt, int pos);
-
-    /**
      * \brief Sums up the bytes of the file starting from the given position.
      * \param size The number of the bytes to sum up.
      * \param pos The position to start summing up from.

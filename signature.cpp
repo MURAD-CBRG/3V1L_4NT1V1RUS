@@ -21,30 +21,17 @@ int Signature::get_PE_offset(){ // returns the position of PE header in file
     int offset = 0;
     for(int i = 60; i < 64; i++)
         offset += pow(256, i - 60) * MS_DOS_HEADER_BUFFER[i]; // size is 64 of MS DOS Header
-    //std::cout<<"The PE_offset is "<<offset<<std::endl;
     return offset;
 }
 int Signature::get_Sections_offset(){
     int offset = get_PE_offset() + 24; // offset of Optional Header
     // 21 and 22 - bytes of optional header size
     offset += PE_HEADER_BUFFER[20] + PE_HEADER_BUFFER[21] * 256;
-    //std::cout<<"the size of optional header: "<<(int)PE_HEADER_BUFFER[20]<<" "<<(int)PE_HEADER_BUFFER[21]<<std::endl;
     return offset;
 }
 int Signature::get_number_of_sections(){
     // 7 and 8 - bytes that define the nubmer of sections
     return PE_HEADER_BUFFER[6] + PE_HEADER_BUFFER[7] * 256;
-}
-void Signature::print(unsigned cnt, int pos=-1){
-    if(pos > 0)
-        file.seekg(pos, std::ios::beg);
-    //cout<<"START print in "<<pos<<" "<<cnt<<std::endl;
-    std::vector<unsigned char> buff(cnt);
-    if(!file.read(reinterpret_cast<char*>(buff.data()), cnt))
-        throw std::ifstream::failure{"Can't read the file!"};
-    //for(unsigned i = 0; i < cnt; i++)
-    //    std::cout<<(int)buff[i]<<' ';
-    //cout<<"\nEND of print\n";
 }
 int Signature::sum_up_bytes(unsigned short size, int pos=-1){
     if(size > 4)
@@ -77,7 +64,6 @@ std::string Signature::get_hash(){
             file.read(reinterpret_cast<char*>(raw_data.data()), size_of_raw_data);
             std::string str(raw_data.begin(), raw_data.end());
             std::string sha = sha256(str);
-            //std::cout<<sha<<std::endl;
             return sha;
         }
         file.seekg(start + (i + 1) * 40, std::ios::beg); // moving to the next section
@@ -99,13 +85,6 @@ void Signature::read_PE_HEADER() { // 24 bytes 4 - signature, 20 - other info
     PE_HEADER_BUFFER = std::vector<unsigned char>(24);
     if(!file.read(reinterpret_cast<char*>(PE_HEADER_BUFFER.data()), 24))
         throw std::ifstream::failure{"Can't read the file!"};
-    //cout<<"PE IS: \n";
-    //int iter = 0;
-    //while (iter < 24) {
-    //    cout<<(int)PE_HEADER_BUFFER[iter]<<" ";
-    //    iter++;
-    //}
-    //cout<<"\nPE END \n";
     if(PE_HEADER_BUFFER[0] != 0x50 || PE_HEADER_BUFFER[1] != 0x45 || PE_HEADER_BUFFER[2] != 0 || PE_HEADER_BUFFER[3] != 0)
         throw std::invalid_argument{"Can't find the PE header! Probably it is missing."};
 }

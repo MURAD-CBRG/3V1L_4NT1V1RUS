@@ -61,7 +61,8 @@ void AntivirusWindow::on_checkFileButton_clicked()
         if(database_control(sig_hash, "FIND"))
             textEdit->append(tr("<font color=\"red\">This file is a virus ") + filename + tr("</font>"));
         else
-            textEdit->append(tr("This file is clear ") + filename);
+            textEdit->append(QString::fromStdString("<font color=\"black\">This file is clear: " +
+                                                    filename.toStdString() + "</font>"));
     }
     catch(std::ifstream::failure){
         QMessageBox::critical(this, "No such file!", "Can't check that file!");

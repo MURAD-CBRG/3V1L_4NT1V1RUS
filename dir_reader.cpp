@@ -13,7 +13,7 @@ void read_dir(std::string dir, QTextEdit* redactor){
                     redactor->append(log);
                 }
                 else{
-                    QString log = QString::fromStdString("This file is clear: " + filename);
+                    QString log = QString::fromStdString("<font color=\"black\">This file is clear: " + filename + "</font>");
                     redactor->append(log);
                 }
             }
