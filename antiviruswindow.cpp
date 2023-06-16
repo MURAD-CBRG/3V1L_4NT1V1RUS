@@ -1,8 +1,5 @@
 #include "antiviruswindow.h"
 #include "./ui_antiviruswindow.h"
-#include <QMessageBox>
-#include <QSystemTrayIcon>
-#include "antivirus.h"
 
 AntivirusWindow::AntivirusWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +19,26 @@ AntivirusWindow::~AntivirusWindow()
 
 void AntivirusWindow::on_checkDirButton_clicked()
 {
-    mySysTrayIcon->showMessage(tr("Clicked!!!!"), tr("yeah, good"));
+    QLineEdit* lineEdit = this->findChild<QLineEdit*>("dirnameLine");
+    QString dirname = lineEdit->text();
+    std::vector<std::string> files = bypassDirectory(dirname.toStdString());
+    for(auto filename: files){
+        try{
+            Signature sig1{filename};
+            std::string sig_hash = sig1.get_hash();
+            QMessageBox::information(this, "Hash", tr("The hash is ") + tr(sig_hash.c_str()));
+            if(search_by_signature(sig_hash))
+                QMessageBox::information(this, "Hash", tr("This file is a virus ") + QString::fromStdString(filename));
+            else
+                QMessageBox::information(this, "Hash", tr("This file is clear ") + QString::fromStdString(filename));
+        }
+        catch(std::ifstream::failure){
+            QMessageBox::critical(this, "No such file!", "Can't check that file!\n" + QString::fromStdString(filename));
+        }
+        catch(std::invalid_argument){
+            QMessageBox::information(this, "Not exe!", "This file is not EXE!\n" + QString::fromStdString(filename));
+        }
+    }
 }
 
 
@@ -38,7 +54,12 @@ void AntivirusWindow::on_checkFileButton_clicked()
     QString filename = lineEdit->text();
     try{
         Signature sig1{filename.toStdString()};
-        QMessageBox::information(this, "Hash", tr("The hash is ") + tr(sig1.get_hash().c_str()));
+        std::string sig_hash = sig1.get_hash();
+        QMessageBox::information(this, "Hash", tr("The hash is ") + tr(sig_hash.c_str()));
+        if(search_by_signature(sig_hash))
+            QMessageBox::information(this, "Hash", tr("This file is a virus ") + filename);
+        else
+            QMessageBox::information(this, "Hash", tr("This file is clear ") + filename);
     }
     catch(std::ifstream::failure){
         QMessageBox::critical(this, "No such file!", "Can't check that file!");
@@ -65,10 +86,25 @@ void AntivirusWindow::on_browseFileButton_clicked()
         //a.setText(fileName);
         //a.show();
     }
+}
 
-    else
+
+void AntivirusWindow::on_browseDirectoryButton_clicked()
+{
+    QString dirName;
+    dirName = QFileDialog::getExistingDirectory(this, tr("Choose directory for checking"), "");
+
+    if (!dirName.isNull())
     {
-        // Нажмите Да, чтобы отменить
+        QLineEdit* lineEdit = this->findChild<QLineEdit*>("dirnameLine");
+        lineEdit->setText(dirName);
     }
+}
+
+
+void AntivirusWindow::on_actionNew_Signature_triggered()
+{
+    addFIleToDBDialog new_file_dialog(this);
+    new_file_dialog.exec();
 }
 

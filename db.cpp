@@ -1,32 +1,36 @@
-#ifndef TEST_CPP
-#define TEST_CPP
+#include "db.h"
 
-#include <iostream>
-#include <string>
-#include "sqllite/sqlite3.h"
-
+int amount_callback{ 0 };
 
 static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
     int i;
+    
+    amount_callback++;
+
     for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+        std::cout << argv[i] << std::endl;
     }
-    printf("\n");
+    
+    std::cout << "\n" << std::endl;
+
+    
     return 0;
 }
-
 
 
 
 bool search_by_signature(std::string virus_hash) {
    sqlite3 *db;
    int rc;  // commander of database
-   char* zErrMsg = 0;
+   char* error_msg = 0;
    std::string sql;
    const char* data = "Callback function called";
+   bool flag{ false };
 
    /* Open database */
    rc = sqlite3_open("virus_test_database.db", &db);
+   //rc = sqlite3_open_v2();
+   
    if( rc ) {
         std::cout << "not opened" << std::endl;
         return false;
@@ -36,12 +40,20 @@ bool search_by_signature(std::string virus_hash) {
 
    sql = "SELECT * FROM viruses WHERE hash='" + virus_hash + "'";
 
-   rc = sqlite3_exec(db, const_cast<char*>(sql.c_str()), callback, (void*)data, &zErrMsg);
-   
+   int last_amount_callback{ amount_callback };
+
+   rc = sqlite3_exec(db, const_cast<char*>(sql.c_str()), callback, (void*)data, &error_msg);
+
+   if (last_amount_callback == amount_callback) {
+       return false;
+   }
+
    if( rc != SQLITE_OK ) {
         std::cout << "not ok" << std::endl;
-        sqlite3_free(zErrMsg);
+        
+        sqlite3_free(error_msg);
         sqlite3_close(db);
+
         return false;
 
    } else {
@@ -51,17 +63,3 @@ bool search_by_signature(std::string virus_hash) {
    sqlite3_close(db);
    return true;
 }
-
-
-int abc() {
-    if (search_by_signature("123")) {
-        std::cout << "exists" << std::endl;
-    } else {
-        std::cout << "not exists" << std::endl;
-    }
-
-    return 0;
-}
-
-
-#endif

@@ -7,6 +7,10 @@
 #include <QMessageBox>
 #include <QMenu>
 #include <QFileDialog>
+#include "antivirus.h"
+#include "bypass.h"
+#include "addfiletodbdialog.h"
+#include "db.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AntivirusWindow; }
@@ -30,6 +34,10 @@ private slots:
     void on_checkFileButton_clicked();
 
     void on_browseFileButton_clicked();
+
+    void on_browseDirectoryButton_clicked();
+
+    void on_actionNew_Signature_triggered();
 
 private:
     Ui::AntivirusWindow *ui;

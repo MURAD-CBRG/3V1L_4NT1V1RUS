@@ -9,24 +9,31 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addfiletodbdialog.cpp \
     main.cpp \
     antiviruswindow.cpp \
     antivirus.cpp \
 #    test.cpp \
     sqllite/shell.c \
     sqllite/sqlite3.c \
-    sha256/sha256.cpp
+    sha256/sha256.cpp \
+    bypass.cpp \
+    db.cpp
 
 HEADERS += \
+    addfiletodbdialog.h \
     antiviruswindow.h \
     antivirus.h \
 #    test.h \
+    bypass.h \
+    db.h \
     sqllite/sqlite3ext.h \
     sqllite/sqlite3.h \
     sha256/sha256.h
 
 
 FORMS += \
+    addfiletodbdialog.ui \
     antiviruswindow.ui
 
 RC_ICONS = sprites/anti.ico
@@ -37,4 +44,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    sprites/anti.png
+    sprites/anti.png \
+    virus_test_database.db

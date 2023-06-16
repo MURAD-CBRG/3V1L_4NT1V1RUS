@@ -1,25 +1,4 @@
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-
-#include <iostream>
-#include <experimental/filesystem>
-#include <vector>
-#include <string>
-
-namespace fs = std::experimental::filesystem;
-
-
-std::vector<std::string> infoAboutPath(std::string path);
-std::vector<std::string> bypassDirectory(std::string path_string);
-
-
-int abc(int argc, char** argv)
-{
-	for (auto i : infoAboutPath("test_file.txt")) std::cout << i << std::endl;
-	for (auto i : bypassDirectory("C:/Users/CYBORG/Desktop/secret_project")) std::cout << i << std::endl;
-
-	return 0;
-}
-
+#include "bypass.h"
 
 std::vector<std::string> infoAboutPath(std::string path) {  // Принимает путь до файла и выводит информацию о нем
 	fs::path pathObj{ path };
