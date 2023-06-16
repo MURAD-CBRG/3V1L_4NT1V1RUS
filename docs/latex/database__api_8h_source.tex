@@ -1,0 +1,19 @@
+\hypertarget{database__api_8h_source}{}\doxysection{database\+\_\+api.\+h}
+\label{database__api_8h_source}\index{db\_manager/database\_api.h@{db\_manager/database\_api.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DATABASE\_API\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DATABASE\_API\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}sqllite/sqlite3.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{19 \textcolor{keyword}{static} \textcolor{keywordtype}{int} callback(\textcolor{keywordtype}{void}* NotUsed, \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv, \textcolor{keywordtype}{char}** azColName);}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 }
+\DoxyCodeLine{36 \textcolor{keywordtype}{bool} database\_control(std::string hash\_of\_exe, std::string action);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

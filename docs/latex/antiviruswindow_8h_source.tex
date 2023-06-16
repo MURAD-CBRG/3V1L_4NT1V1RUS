@@ -1,0 +1,70 @@
+\hypertarget{antiviruswindow_8h_source}{}\doxysection{antiviruswindow.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ANTIVIRUSWINDOW\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ANTIVIRUSWINDOW\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QMainWindow>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QApplication>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QSystemTrayIcon>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QMenu>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <QFileDialog>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QThread>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}signature.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}db\_manager/database\_api.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}conf.h"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}analizerseparated.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}dir\_reader.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}addfiletodbdialog.h"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}configuredialog.h"{}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{21 \textcolor{keyword}{namespace }Ui \{ \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}}; \}}
+\DoxyCodeLine{22 QT\_END\_NAMESPACE}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{class }QSystemTrayIcon;}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}} : \textcolor{keyword}{public} QMainWindow}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     Q\_OBJECT}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{51     \mbox{\hyperlink{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}{\string~AntivirusWindow}}();}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}{closeEvent}}(QCloseEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}{changeEvent}}(QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} on\_checkDirButton\_clicked();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} on\_actionExit\_triggered();}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{94     \textcolor{keywordtype}{void} on\_checkFileButton\_clicked();}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{102     \textcolor{keywordtype}{void} on\_browseFileButton\_clicked();}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{void} on\_browseDirectoryButton\_clicked();}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} on\_actionNew\_Signature\_triggered();}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{void} trayIconActivated(QSystemTrayIcon::ActivationReason reason);}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{void} on\_actionSettings\_triggered();}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{142     \textcolor{keywordtype}{void} autocheck\_on();}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{keyword}{private}:}
+\DoxyCodeLine{145     Ui::AntivirusWindow *ui; }
+\DoxyCodeLine{146     QSystemTrayIcon *mySysTrayIcon; }
+\DoxyCodeLine{147     QThread* autoanalyzerThread; }
+\DoxyCodeLine{148 \};}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ANTIVIRUSWINDOW\_H}}
+
+\end{DoxyCode}

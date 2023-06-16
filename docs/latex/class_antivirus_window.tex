@@ -1,0 +1,88 @@
+\hypertarget{class_antivirus_window}{}\doxysection{Antivirus\+Window Class Reference}
+\label{class_antivirus_window}\index{AntivirusWindow@{AntivirusWindow}}
+
+
+The main window class for the antivirus application.  
+
+
+
+
+{\ttfamily \#include $<$antiviruswindow.\+h$>$}
+
+Inheritance diagram for Antivirus\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_antivirus_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_antivirus_window_a1e699e64639c25331910a44e3af00b7f}{Antivirus\+Window}} (QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs the main window for the antivirus application. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}{$\sim$\+Antivirus\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the main window for the antivirus application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}{close\+Event}} (QClose\+Event $\ast$event) override
+\begin{DoxyCompactList}\small\item\em Overridden function for handling close events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}{change\+Event}} (QEvent $\ast$event) override
+\begin{DoxyCompactList}\small\item\em Overridden function for handling change events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main window class for the antivirus application. 
+
+This class defines the main window for the antivirus application. It contains slots for responding to user actions, such as checking a file or directory, adding a new signature, or opening the settings dialog. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_antivirus_window_a1e699e64639c25331910a44e3af00b7f}\label{class_antivirus_window_a1e699e64639c25331910a44e3af00b7f}} 
+\index{AntivirusWindow@{AntivirusWindow}!AntivirusWindow@{AntivirusWindow}}
+\index{AntivirusWindow@{AntivirusWindow}!AntivirusWindow@{AntivirusWindow}}
+\doxysubsubsection{\texorpdfstring{AntivirusWindow()}{AntivirusWindow()}}
+{\footnotesize\ttfamily Antivirus\+Window\+::\+Antivirus\+Window (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Constructs the main window for the antivirus application. 
+
+This function initializes the user interface and sets up the system tray icon and the autoanalyzer thread. \mbox{\Hypertarget{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}\label{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}} 
+\index{AntivirusWindow@{AntivirusWindow}!````~AntivirusWindow@{$\sim$AntivirusWindow}}
+\index{````~AntivirusWindow@{$\sim$AntivirusWindow}!AntivirusWindow@{AntivirusWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$AntivirusWindow()}{~AntivirusWindow()}}
+{\footnotesize\ttfamily Antivirus\+Window\+::$\sim$\+Antivirus\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroys the main window for the antivirus application. 
+
+This function stops the autoanalyzer thread, hides the system tray icon and deletes the user interface and system tray icon objects. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}\label{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}} 
+\index{AntivirusWindow@{AntivirusWindow}!changeEvent@{changeEvent}}
+\index{changeEvent@{changeEvent}!AntivirusWindow@{AntivirusWindow}}
+\doxysubsubsection{\texorpdfstring{changeEvent()}{changeEvent()}}
+{\footnotesize\ttfamily void Antivirus\+Window\+::change\+Event (\begin{DoxyParamCaption}\item[{QEvent $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Overridden function for handling change events. 
+
+This function is called when the main window changes state, such as when it is minimized or restored. If the main window is minimized, it hides the window instead of minimizing it. \mbox{\Hypertarget{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}\label{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}} 
+\index{AntivirusWindow@{AntivirusWindow}!closeEvent@{closeEvent}}
+\index{closeEvent@{closeEvent}!AntivirusWindow@{AntivirusWindow}}
+\doxysubsubsection{\texorpdfstring{closeEvent()}{closeEvent()}}
+{\footnotesize\ttfamily void Antivirus\+Window\+::close\+Event (\begin{DoxyParamCaption}\item[{QClose\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Overridden function for handling close events. 
+
+This function is called when the main window is closed. If the system tray icon is visible, it hides the main window instead of closing it. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+antiviruswindow.\+h\item 
+antiviruswindow.\+cpp\end{DoxyCompactItemize}

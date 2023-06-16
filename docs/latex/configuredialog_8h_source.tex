@@ -1,0 +1,43 @@
+\hypertarget{configuredialog_8h_source}{}\doxysection{configuredialog.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CONFIGUREDIALOG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CONFIGUREDIALOG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPlainTextEdit>}>}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QCheckBox>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QSpinBox>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <numeric>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}conf.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{classconfigure_dialog}{configureDialog}};}
+\DoxyCodeLine{17 \}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{24 \textcolor{keyword}{class }\mbox{\hyperlink{classconfigure_dialog}{configureDialog}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{25 \{}
+\DoxyCodeLine{26     Q\_OBJECT}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{public}:}
+\DoxyCodeLine{35     \textcolor{keyword}{explicit} \mbox{\hyperlink{classconfigure_dialog}{configureDialog}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{42     \mbox{\hyperlink{classconfigure_dialog_a8894a65a9baf73e66dbeb1ffda0ee03d}{\string~configureDialog}}();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} on\_saveButton\_clicked();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{private}:}
+\DoxyCodeLine{55     Ui::configureDialog *ui; }
+\DoxyCodeLine{56     QPlainTextEdit* dirsEdit; }
+\DoxyCodeLine{57     QCheckBox* isonCheckbox; }
+\DoxyCodeLine{58     QSpinBox* timeintervalEdit; }
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CONFIGUREDIALOG\_H}}
+
+\end{DoxyCode}

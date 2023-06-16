@@ -1,0 +1,40 @@
+\hypertarget{addfiletodbdialog_8h_source}{}\doxysection{addfiletodbdialog.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ADDFILETODBDIALOG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ADDFILETODBDIALOG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QFileDialog>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}db\_manager/database\_api.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}signature.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{classadd_f_ile_to_d_b_dialog}{addFIleToDBDialog}};}
+\DoxyCodeLine{13 \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{classadd_f_ile_to_d_b_dialog}{addFIleToDBDialog}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22     Q\_OBJECT}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \textcolor{keyword}{explicit} \mbox{\hyperlink{classadd_f_ile_to_d_b_dialog}{addFIleToDBDialog}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{39     \mbox{\hyperlink{classadd_f_ile_to_d_b_dialog_aaf391dc2b847b667bdef22036eff00f9}{\string~addFIleToDBDialog}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} on\_browseButton\_clicked();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} on\_addButton\_clicked();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} on\_removeButton\_clicked();}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{private}:}
+\DoxyCodeLine{67     Ui::addFIleToDBDialog *ui; }
+\DoxyCodeLine{68 \};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ADDFILETODBDIALOG\_H}}
+
+\end{DoxyCode}

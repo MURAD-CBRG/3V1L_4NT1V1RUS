@@ -1,0 +1,70 @@
+\hypertarget{classanalizer_separated}{}\doxysection{analizer\+Separated Class Reference}
+\label{classanalizer_separated}\index{analizerSeparated@{analizerSeparated}}
+
+
+A class for analyzing directories in a separate thread.  
+
+
+
+
+{\ttfamily \#include $<$analizerseparated.\+h$>$}
+
+Inheritance diagram for analizer\+Separated\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classanalizer_separated}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classanalizer_separated_acc5c1c01823d3767e4b78ea4b8aaed00}{analizer\+Separated}} (int interval\+\_\+in\+\_\+seconds, std\+::vector$<$ std\+::string $>$ dirs, QText\+Edit $\ast$redactor)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classanalizer_separated}{analizer\+Separated}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classanalizer_separated_a16f6b8c71a0b1caa00331d4b12292232}{analize\+\_\+for\+\_\+intervals}} ()
+\begin{DoxyCompactList}\small\item\em Function for running the analysis in a separate thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for analyzing directories in a separate thread. 
+
+This class provides a separate thread for analyzing directories at regular intervals. It takes an interval in seconds at which to perform the analysis, a vector of directory paths to analyze, and a pointer to a QText\+Edit widget to display the results of the analysis. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classanalizer_separated_acc5c1c01823d3767e4b78ea4b8aaed00}\label{classanalizer_separated_acc5c1c01823d3767e4b78ea4b8aaed00}} 
+\index{analizerSeparated@{analizerSeparated}!analizerSeparated@{analizerSeparated}}
+\index{analizerSeparated@{analizerSeparated}!analizerSeparated@{analizerSeparated}}
+\doxysubsubsection{\texorpdfstring{analizerSeparated()}{analizerSeparated()}}
+{\footnotesize\ttfamily analizer\+Separated\+::analizer\+Separated (\begin{DoxyParamCaption}\item[{int}]{interval\+\_\+in\+\_\+seconds,  }\item[{std\+::vector$<$ std\+::string $>$}]{dirs,  }\item[{QText\+Edit $\ast$}]{redactor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for the \mbox{\hyperlink{classanalizer_separated}{analizer\+Separated}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval\+\_\+seconds} & The interval in seconds at which to perform the analysis. \\
+\hline
+{\em dirs} & A vector of directory paths to analyze. \\
+\hline
+{\em redactor} & A pointer to a QText\+Edit widget to display the results of the analysis.\\
+\hline
+\end{DoxyParams}
+This constructor initializes the member variables of the \mbox{\hyperlink{classanalizer_separated}{analizer\+Separated}} class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classanalizer_separated_a16f6b8c71a0b1caa00331d4b12292232}\label{classanalizer_separated_a16f6b8c71a0b1caa00331d4b12292232}} 
+\index{analizerSeparated@{analizerSeparated}!analize\_for\_intervals@{analize\_for\_intervals}}
+\index{analize\_for\_intervals@{analize\_for\_intervals}!analizerSeparated@{analizerSeparated}}
+\doxysubsubsection{\texorpdfstring{analize\_for\_intervals()}{analize\_for\_intervals()}}
+{\footnotesize\ttfamily void analizer\+Separated\+::analize\+\_\+for\+\_\+intervals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function for running the analysis in a separate thread. 
+
+This function runs the analysis in a separate thread, looping through the specified directories at regular intervals and displaying the results in the QText\+Edit widget. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+analizerseparated.\+h\item 
+analizerseparated.\+cpp\end{DoxyCompactItemize}

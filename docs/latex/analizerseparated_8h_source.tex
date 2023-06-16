@@ -1,0 +1,35 @@
+\hypertarget{analizerseparated_8h_source}{}\doxysection{analizerseparated.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ANALIZERSEPARATED\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ANALIZERSEPARATED\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QThread>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QTextEdit>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}dir\_reader.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{classanalizer_separated}{analizerSeparated}} : \textcolor{keyword}{public} QObject  \textcolor{comment}{// EXAMPLE OF THREAD}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \textcolor{keyword}{explicit} \mbox{\hyperlink{classanalizer_separated}{analizerSeparated}}(\textcolor{keywordtype}{int} interval\_in\_seconds,}
+\DoxyCodeLine{33                                std::vector<std::string> dirs,}
+\DoxyCodeLine{34                                QTextEdit* redactor);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} \mbox{\hyperlink{classanalizer_separated_a16f6b8c71a0b1caa00331d4b12292232}{analize\_for\_intervals}}();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{private}:}
+\DoxyCodeLine{45     \textcolor{keywordtype}{int} interval\_seconds; }
+\DoxyCodeLine{46     std::vector<std::string> dirs; }
+\DoxyCodeLine{47     QTextEdit* redactor; }
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ANALIZERSEPARATED\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,140 @@
+\hypertarget{class_signature}{}\doxysection{Signature Class Reference}
+\label{class_signature}\index{Signature@{Signature}}
+
+
+A class for reading the headers of a Windows executable and calculating its SHA256 hash value.  
+
+
+
+
+{\ttfamily \#include $<$signature.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_signature_a076653a1d82cf7a436c20d966247fc3e}{Signature}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_signature_ad0bb12039b385e4600dddc7d703f52fb}{$\sim$\+Signature}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \mbox{\hyperlink{class_signature}{Signature}} object and closes the file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_signature_a114a817dedf1412b461d9fe4ec9752e0}{get\+\_\+\+PE\+\_\+offset}} ()
+\begin{DoxyCompactList}\small\item\em Returns the offset of the PE header in the file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}{get\+\_\+\+Sections\+\_\+offset}} ()
+\begin{DoxyCompactList}\small\item\em Returns the offset of the section headers in the file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_signature_af9c9d17beeaa1305e666b469b193248f}{get\+\_\+number\+\_\+of\+\_\+sections}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of sections in the headers of the file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}{sum\+\_\+up\+\_\+bytes}} (unsigned short size, int pos)
+\begin{DoxyCompactList}\small\item\em Sums up the bytes of the file starting from the given position. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_signature_afae6fd692e7618d91b75973d947f5193}{get\+\_\+hash}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the SHA256 hash value of the file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for reading the headers of a Windows executable and calculating its SHA256 hash value. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_signature_a076653a1d82cf7a436c20d966247fc3e}\label{class_signature_a076653a1d82cf7a436c20d966247fc3e}} 
+\index{Signature@{Signature}!Signature@{Signature}}
+\index{Signature@{Signature}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{Signature()}{Signature()}}
+{\footnotesize\ttfamily Signature\+::\+Signature (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path of the file to be read.\\
+\hline
+\end{DoxyParams}
+This constructor creates a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file and reads PE and MS\+\_\+\+DOS headers of file. \mbox{\Hypertarget{class_signature_ad0bb12039b385e4600dddc7d703f52fb}\label{class_signature_ad0bb12039b385e4600dddc7d703f52fb}} 
+\index{Signature@{Signature}!````~Signature@{$\sim$Signature}}
+\index{````~Signature@{$\sim$Signature}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{$\sim$Signature()}{~Signature()}}
+{\footnotesize\ttfamily Signature\+::$\sim$\+Signature (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroys the \mbox{\hyperlink{class_signature}{Signature}} object and closes the file. 
+
+This destructor destroys the \mbox{\hyperlink{class_signature}{Signature}} object and closes the file associated with it. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_signature_afae6fd692e7618d91b75973d947f5193}\label{class_signature_afae6fd692e7618d91b75973d947f5193}} 
+\index{Signature@{Signature}!get\_hash@{get\_hash}}
+\index{get\_hash@{get\_hash}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_hash()}{get\_hash()}}
+{\footnotesize\ttfamily std\+::string Signature\+::get\+\_\+hash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the SHA256 hash value of the file. 
+
+\begin{DoxyReturn}{Returns}
+The SHA256 hash value of the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_af9c9d17beeaa1305e666b469b193248f}\label{class_signature_af9c9d17beeaa1305e666b469b193248f}} 
+\index{Signature@{Signature}!get\_number\_of\_sections@{get\_number\_of\_sections}}
+\index{get\_number\_of\_sections@{get\_number\_of\_sections}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_number\_of\_sections()}{get\_number\_of\_sections()}}
+{\footnotesize\ttfamily int Signature\+::get\+\_\+number\+\_\+of\+\_\+sections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of sections in the headers of the file. 
+
+\begin{DoxyReturn}{Returns}
+The number of sections in the headers of the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_a114a817dedf1412b461d9fe4ec9752e0}\label{class_signature_a114a817dedf1412b461d9fe4ec9752e0}} 
+\index{Signature@{Signature}!get\_PE\_offset@{get\_PE\_offset}}
+\index{get\_PE\_offset@{get\_PE\_offset}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_PE\_offset()}{get\_PE\_offset()}}
+{\footnotesize\ttfamily int Signature\+::get\+\_\+\+PE\+\_\+offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the offset of the PE header in the file. 
+
+\begin{DoxyReturn}{Returns}
+The offset of the PE header in the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}\label{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}} 
+\index{Signature@{Signature}!get\_Sections\_offset@{get\_Sections\_offset}}
+\index{get\_Sections\_offset@{get\_Sections\_offset}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_Sections\_offset()}{get\_Sections\_offset()}}
+{\footnotesize\ttfamily int Signature\+::get\+\_\+\+Sections\+\_\+offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the offset of the section headers in the file. 
+
+\begin{DoxyReturn}{Returns}
+The offset of the section headers in the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}\label{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}} 
+\index{Signature@{Signature}!sum\_up\_bytes@{sum\_up\_bytes}}
+\index{sum\_up\_bytes@{sum\_up\_bytes}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{sum\_up\_bytes()}{sum\_up\_bytes()}}
+{\footnotesize\ttfamily int Signature\+::sum\+\_\+up\+\_\+bytes (\begin{DoxyParamCaption}\item[{unsigned short}]{size,  }\item[{int}]{pos = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Sums up the bytes of the file starting from the given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The number of the bytes to sum up. \\
+\hline
+{\em pos} & The position to start summing up from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sum of the bytes. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+signature.\+h\item 
+signature.\+cpp\end{DoxyCompactItemize}
