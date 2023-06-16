@@ -15,5 +15,6 @@ struct ConfigurationAnalyse {
 
 
 ConfigurationAnalyse getConfigurationForAnalysis();
+void setConfigurationAnalysis(ConfigurationAnalyse conf);
 
 #endif

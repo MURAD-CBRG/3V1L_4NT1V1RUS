@@ -1,10 +1,8 @@
 #include "analizerseparated.h"
 
-analizerSeparated::analizerSeparated(QString name,
-                                     int interval_seconds,
+analizerSeparated::analizerSeparated(int interval_seconds,
                                      std::vector<std::string> dirs,
                                      QTextEdit* redactor) :
-    name(name),
     interval_seconds(interval_seconds),
     dirs(dirs),
     redactor(redactor) {}

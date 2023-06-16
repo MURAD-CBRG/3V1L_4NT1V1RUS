@@ -19,34 +19,18 @@ AntivirusWindow::AntivirusWindow(QWidget *parent)
     mySysTrayIcon->setVisible(true);
 
 
-
+    autoanalyzerThread = new QThread(this);
     // init auto checker
-    try{
-        ConfigurationAnalyse conf = getConfigurationForAnalysis();
-        if(conf.work_flag){
-            QThread* thread = new QThread(this);
-            QTextEdit* main_log = findChild<QTextEdit*>("logging");
-            analizerSeparated* t1 = new analizerSeparated("t1", conf.time_interval, conf.baseDirs, main_log);
-            t1->moveToThread(thread);
-            connect(thread, &QThread::started, t1, &analizerSeparated::analize_for_intervals);
-
-            // Start the thread
-            thread->start();
-        }
-    }
-    catch(std::fstream::failure){
-        std::cout<<"No conf file!"<<std::endl;
-    }
+    autocheck_on();
 }
 
 AntivirusWindow::~AntivirusWindow()
 {
-    QList<QThread*> threads = findChildren<QThread*>();
-    for (QThread* thread : threads) {
-        thread->requestInterruption();
-        thread->quit();
-        thread->wait();
-    }
+    autoanalyzerThread->requestInterruption();
+    autoanalyzerThread->quit();
+    autoanalyzerThread->wait();
+    mySysTrayIcon->hide();
+    delete mySysTrayIcon;
     delete ui;
 }
 
@@ -144,3 +128,33 @@ void AntivirusWindow::changeEvent(QEvent* event)
     }
     QMainWindow::changeEvent(event);
 }
+
+void AntivirusWindow::on_actionSettings_triggered()
+{
+    configureDialog confDialog(this);
+    if(confDialog.exec() == QDialog::Accepted){
+        autoanalyzerThread->requestInterruption();
+        autoanalyzerThread->quit();
+
+        autocheck_on();
+    }
+}
+
+void AntivirusWindow::autocheck_on(){
+    try{
+        ConfigurationAnalyse conf = getConfigurationForAnalysis();
+        if(conf.work_flag){
+            QTextEdit* main_log = findChild<QTextEdit*>("logging");
+            analizerSeparated* analizer = new analizerSeparated(conf.time_interval, conf.baseDirs, main_log);
+            analizer->moveToThread(autoanalyzerThread);
+            connect(autoanalyzerThread, &QThread::started, analizer, &analizerSeparated::analize_for_intervals);
+
+            // Start the thread
+            autoanalyzerThread->start();
+        }
+    }
+    catch(std::fstream::failure){
+        QMessageBox::critical(this, "Error!", "Autocheck can't be run because there is no conf file!");
+    }
+}
+

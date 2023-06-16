@@ -260,6 +260,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <string>File</string>
     </property>
     <addaction name="actionNew_Signature"/>
+    <addaction name="actionSettings"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -274,6 +275,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <action name="actionNew_Signature">
    <property name="text">
     <string>New Signature...</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings...</string>
    </property>
   </action>
  </widget>

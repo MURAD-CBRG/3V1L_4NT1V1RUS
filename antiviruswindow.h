@@ -10,12 +10,12 @@
 #include <QThread>
 
 #include "signature.h"
-#include "bypass.h"
-#include "addfiletodbdialog.h"
 #include "db_manager/database_api.h"
 #include "conf.h"
 #include "analizerseparated.h"
 #include "dir_reader.h"
+#include "addfiletodbdialog.h"
+#include "configuredialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AntivirusWindow; }
@@ -51,8 +51,13 @@ private slots:
 
     void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
+    void on_actionSettings_triggered();
+
+    void autocheck_on();
+
 private:
     Ui::AntivirusWindow *ui;
     QSystemTrayIcon *mySysTrayIcon;
+    QThread* autoanalyzerThread;
 };
 #endif // ANTIVIRUSWINDOW_H
