@@ -33,7 +33,17 @@ void addFIleToDBDialog::on_browseButton_clicked()
 void addFIleToDBDialog::on_addButton_clicked()
 {
     QLineEdit* lineEdit = this->findChild<QLineEdit*>("pathLine");
-    std::string filename = lineEdit->text().toStdString();
+    try{
+        Signature sig{lineEdit->text().toStdString()};
+        std::string hash_exe = sig.get_hash();
+        database_control(hash_exe, "ADD");
+    }
+    catch(std::ifstream::failure){
+        QMessageBox::critical(this, "Error", "Occured error while reading the file!");
+    }
+    catch(std::invalid_argument){
+        QMessageBox::information(this, "Not exe!", "This file is not EXE!");
+    }
 }
 
 
@@ -41,5 +51,16 @@ void addFIleToDBDialog::on_removeButton_clicked()
 {
     QLineEdit* lineEdit = this->findChild<QLineEdit*>("pathLine");
     std::string filename = lineEdit->text().toStdString();
+    try{
+        Signature sig{lineEdit->text().toStdString()};
+        std::string hash_exe = sig.get_hash();
+        database_control(hash_exe, "DELETE");
+    }
+    catch(std::ifstream::failure){
+        QMessageBox::critical(this, "Error", "Occured error while reading the file!");
+    }
+    catch(std::invalid_argument){
+        QMessageBox::information(this, "Not exe!", "This file is not EXE!");
+    }
 }
 

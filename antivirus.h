@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <vector>
 
+#include "sha256/sha256.h"
+
 class Signature
 {
 public:

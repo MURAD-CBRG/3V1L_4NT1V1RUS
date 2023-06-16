@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sprites/anti.png</file>
+    </qresource>
+</RCC>

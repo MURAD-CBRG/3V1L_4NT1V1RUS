@@ -3,6 +3,10 @@
 
 #include <QDialog>
 #include <QFileDialog>
+#include <QMessageBox>
+
+#include "db_manager/database_api.h"
+#include "antivirus.h"
 
 namespace Ui {
 class addFIleToDBDialog;

@@ -1,12 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <filesystem>
-#include <string>
-#include <cstring>
-#include <algorithm>
-#include "sha256/sha256.h"
-#include <vector>
 #include "antivirus.h"
 
 

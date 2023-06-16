@@ -1,17 +1,14 @@
 #include "antiviruswindow.h"
 
 #include <QApplication>
-#include <QSystemTrayIcon>
-#include <QMenu>
-#include <QDebug>
-
-#include <iostream>
+#include "analizerseparated.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     AntivirusWindow w;
-    w.show();
+    //analizerThread a("abc");
+    //a.start();
 
     return app.exec();
 }

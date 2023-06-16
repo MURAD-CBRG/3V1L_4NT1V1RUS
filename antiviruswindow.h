@@ -7,10 +7,14 @@
 #include <QMessageBox>
 #include <QMenu>
 #include <QFileDialog>
+#include <QThread>
+
 #include "antivirus.h"
 #include "bypass.h"
 #include "addfiletodbdialog.h"
-#include "db.h"
+#include "db_manager/database_api.h"
+#include "conf.h"
+#include "analizerseparated.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AntivirusWindow; }
@@ -26,6 +30,11 @@ public:
     AntivirusWindow(QWidget *parent = nullptr);
     ~AntivirusWindow();
 
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
+    void changeEvent(QEvent* event) override;
+
 private slots:
     void on_checkDirButton_clicked();
 
@@ -38,6 +47,8 @@ private slots:
     void on_browseDirectoryButton_clicked();
 
     void on_actionNew_Signature_triggered();
+
+    void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
 private:
     Ui::AntivirusWindow *ui;

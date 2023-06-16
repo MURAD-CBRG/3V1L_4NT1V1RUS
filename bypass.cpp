@@ -14,15 +14,16 @@ std::vector<std::string> infoAboutPath(std::string path) {  // Принимает путь до
 	return result;
 }
 
+std::vector<std::string> bypassDirectory(std::string path_string) {
+    fs::path pathdir{ path_string };
+    fs::recursive_directory_iterator iterDir{ pathdir };
+    std::vector<std::string> result_base_path;
 
-std::vector<std::string> bypassDirectory(std::string path_string) {  // Принимает путь до каталога и рекурсивно выводит все файлы и каталоги, находящиеся в нем
-	fs::path pathdir{ path_string };
-	fs::recursive_directory_iterator iterDir{ pathdir };
-	std::vector<std::string> result_base_path;
+    for (auto iterElementDir : iterDir) {
+        if (infoAboutPath(iterElementDir.path().string()).back() == ".exe") {
+            result_base_path.push_back(iterElementDir.path().string());
+        }
+    }
 
-	for (auto iterElementDir : iterDir) {
-		result_base_path.push_back(iterElementDir.path().string());
-	}
-
-	return result_base_path;
+    return result_base_path;
 }
