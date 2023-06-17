@@ -13,16 +13,18 @@
 #include "sha256/sha256.h"
 
 /**
+ * \class Signature
  * \brief A class for reading the headers of a Windows executable and calculating its SHA256 hash value.
  */
 class Signature
 {
 public:
     /**
-     * \brief Constructs a new Signature object for the given file.
-     * \param filename The path of the file to be read.
+     * \brief Constructor which takes a file name as an argument and opens the file in binary mode. The constructor reads the MS-DOS header and PE header of the file.
      *
-     * This constructor creates a new Signature object for the given file and reads PE and MS_DOS headers of file.
+     * \param filename The name of the file to open.
+     *
+     * \throws std::ifstream::failure If the file cannot be opened.
      */
     Signature(std::string filename);
 
@@ -35,54 +37,85 @@ public:
 
     /**
      * \brief Returns the offset of the PE header in the file.
+     *
      * \return The offset of the PE header in the file.
      */
     int get_PE_offset();
 
     /**
      * \brief Returns the offset of the section headers in the file.
+     *
      * \return The offset of the section headers in the file.
      */
     int get_Sections_offset();
 
     /**
      * \brief Returns the number of sections in the headers of the file.
+     *
      * \return The number of sections in the headers of the file.
      */
     int get_number_of_sections();
 
     /**
-     * \brief Sums up the bytes of the file starting from the given position.
-     * \param size The number of the bytes to sum up.
-     * \param pos The position to start summing up from.
-     * \return The sum of the bytes.
+     * \brief Reads the specified number of bytes from the file at the given position, and returns the sum of the bytes computed as an integer.
+     *
+     * \param size The number of bytes to read.
+     * \param pos The position in the file to start reading from.
+     *
+     * \throws std::invalid_argument If the size parameter is greater than 4.
+     * \throws std::ifstream::failure If the file cannot be read.
+     *
+     * \return The sum of the bytes computed as an integer.
      */
-    int sum_up_bytes(unsigned short size, int pos);
+    long int sum_up_bytes(unsigned short size, int pos = -1);
 
     /**
-     * \brief Calculates the SHA256 hash value of the file.
-     * \return The SHA256 hash value of the file.
+     * \brief Returns the SHA256 hash of the `.text` section of the file.
+     *
+     * The method uses the sum_up_bytes() function to compute the size and offset of the raw data of the `.text` section,
+     * and then reads the raw data and computes its hash using the sha256() function.
+     *
+     * \throws std::ifstream::failure If the file cannot be read.
+     *
+     * \return The SHA256 hash of the `.text` section of the file.
      */
     std::string get_hash();
+
+    /**
+     * \brief Returns the MS-DOS header buffer.
+     *
+     * \return The MS-DOS header buffer.
+     */
+    std::vector<unsigned char> get_MS_DOS_HEADER_BUFFER() const;
+
+    /**
+     * \brief Returns the PE header buffer.
+     *
+     * \return The PE header buffer.
+     */
+    std::vector<unsigned char> get_PE_HEADER_BUFFER() const;
+
 private:
     /**
-     * \brief Reads the MS-DOS header of the file.
+     * \brief Reads the MS-DOS header of the file and checks that the file is an executable file.
      *
-     * This function reads the MS-DOS header of the file and stores it in the MS_DOS_HEADER_BUFFER vector.
+     * \throws std::invalid_argument If the file is not an executable file.
+     * \throws std::ifstream::failure If the file cannot be read.
      */
     void read_MS_DOS_HEADER();
 
     /**
-     * \brief Reads the PE header of the file.
+     * \brief Reads the PE header of the file and checks that the PE header exists.
      *
-     * This function reads the PE header of the file and stores it in the PE_HEADER_BUFFER vector.
+     * \throws std::invalid_argument If the PE header does not exist.
+     * \throws std::ifstream::failure If the file cannot be read.
      */
     void read_PE_HEADER();
 
-    std::string filename; /**< The path of the file. */
-    std::ifstream file; /**< An ifstream object for reading the file. */
+    std::string filename;                            /**< The path of the file. */
+    std::ifstream file;                              /**< An ifstream object for reading the file. */
     std::vector<unsigned char> MS_DOS_HEADER_BUFFER; /**< The MS-DOS header of the file. */
-    std::vector<unsigned char> PE_HEADER_BUFFER; /**< The PE header of the file. */
+    std::vector<unsigned char> PE_HEADER_BUFFER;     /**< The PE header of the file. */
 };
 
 #endif
