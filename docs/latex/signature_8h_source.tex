@@ -15,33 +15,38 @@
 \DoxyCodeLine{12 }
 \DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}sha256/sha256.h"{}}}
 \DoxyCodeLine{14 }
-\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_signature}{Signature}}}
-\DoxyCodeLine{19 \{}
-\DoxyCodeLine{20 \textcolor{keyword}{public}:}
-\DoxyCodeLine{27     \mbox{\hyperlink{class_signature}{Signature}}(std::string filename);}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{34     \mbox{\hyperlink{class_signature_ad0bb12039b385e4600dddc7d703f52fb}{\string~Signature}}();}
-\DoxyCodeLine{35 }
-\DoxyCodeLine{40     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a114a817dedf1412b461d9fe4ec9752e0}{get\_PE\_offset}}();}
-\DoxyCodeLine{41 }
-\DoxyCodeLine{46     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}{get\_Sections\_offset}}();}
-\DoxyCodeLine{47 }
-\DoxyCodeLine{52     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_af9c9d17beeaa1305e666b469b193248f}{get\_number\_of\_sections}}();}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{60     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}{sum\_up\_bytes}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} size, \textcolor{keywordtype}{int} pos);}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{66     std::string \mbox{\hyperlink{class_signature_afae6fd692e7618d91b75973d947f5193}{get\_hash}}();}
-\DoxyCodeLine{67 \textcolor{keyword}{private}:}
-\DoxyCodeLine{73     \textcolor{keywordtype}{void} read\_MS\_DOS\_HEADER();}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{80     \textcolor{keywordtype}{void} read\_PE\_HEADER();}
-\DoxyCodeLine{81 }
-\DoxyCodeLine{82     std::string filename; }
-\DoxyCodeLine{83     std::ifstream file; }
-\DoxyCodeLine{84     std::vector<unsigned char> MS\_DOS\_HEADER\_BUFFER; }
-\DoxyCodeLine{85     std::vector<unsigned char> PE\_HEADER\_BUFFER; }
-\DoxyCodeLine{86 \};}
-\DoxyCodeLine{87 }
-\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{19 \textcolor{keyword}{class }\mbox{\hyperlink{class_signature}{Signature}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_signature}{Signature}}(std::string filename);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36     \mbox{\hyperlink{class_signature_ad0bb12039b385e4600dddc7d703f52fb}{\string~Signature}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a114a817dedf1412b461d9fe4ec9752e0}{get\_PE\_offset}}();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}{get\_Sections\_offset}}();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_af9c9d17beeaa1305e666b469b193248f}{get\_number\_of\_sections}}();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_signature_a8881448fcd549267f338a61957196dde}{sum\_up\_bytes}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} size, \textcolor{keywordtype}{int} pos = -\/1);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{82     std::string \mbox{\hyperlink{class_signature_afae6fd692e7618d91b75973d947f5193}{get\_hash}}();}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{89     std::vector<unsigned char> \mbox{\hyperlink{class_signature_a269fe4069b8a97612228b07baa17d3f0}{get\_MS\_DOS\_HEADER\_BUFFER}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{96     std::vector<unsigned char> \mbox{\hyperlink{class_signature_a97711184a9117cdb06644b347a8ac75e}{get\_PE\_HEADER\_BUFFER}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{keyword}{private}:}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} read\_MS\_DOS\_HEADER();}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} read\_PE\_HEADER();}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     std::string filename;                            }
+\DoxyCodeLine{116     std::ifstream file;                              }
+\DoxyCodeLine{117     std::vector<unsigned char> MS\_DOS\_HEADER\_BUFFER; }
+\DoxyCodeLine{118     std::vector<unsigned char> PE\_HEADER\_BUFFER;     }
+\DoxyCodeLine{119 \};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -13,7 +13,7 @@ A class for reading the headers of a Windows executable and calculating its SHA2
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_signature_a076653a1d82cf7a436c20d966247fc3e}{Signature}} (std\+::string filename)
-\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor which takes a file name as an argument and opens the file in binary mode. The constructor reads the MS-\/\+DOS header and PE header of the file. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_signature_ad0bb12039b385e4600dddc7d703f52fb}{$\sim$\+Signature}} ()
 \begin{DoxyCompactList}\small\item\em Destroys the \mbox{\hyperlink{class_signature}{Signature}} object and closes the file. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_signature_a114a817dedf1412b461d9fe4ec9752e0}{get\+\_\+\+PE\+\_\+offset}} ()
@@ -22,10 +22,14 @@ int \mbox{\hyperlink{class_signature_a832f49deb8bb78a2503cec99df5a0f3b}{get\+\_\
 \begin{DoxyCompactList}\small\item\em Returns the offset of the section headers in the file. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_signature_af9c9d17beeaa1305e666b469b193248f}{get\+\_\+number\+\_\+of\+\_\+sections}} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of sections in the headers of the file. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}{sum\+\_\+up\+\_\+bytes}} (unsigned short size, int pos)
-\begin{DoxyCompactList}\small\item\em Sums up the bytes of the file starting from the given position. \end{DoxyCompactList}\item 
+long int \mbox{\hyperlink{class_signature_a8881448fcd549267f338a61957196dde}{sum\+\_\+up\+\_\+bytes}} (unsigned short size, int pos=-\/1)
+\begin{DoxyCompactList}\small\item\em Reads the specified number of bytes from the file at the given position, and returns the sum of the bytes computed as an integer. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{class_signature_afae6fd692e7618d91b75973d947f5193}{get\+\_\+hash}} ()
-\begin{DoxyCompactList}\small\item\em Calculates the SHA256 hash value of the file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the SHA256 hash of the {\ttfamily .text} section of the file. \end{DoxyCompactList}\item 
+std\+::vector$<$ unsigned char $>$ \mbox{\hyperlink{class_signature_a269fe4069b8a97612228b07baa17d3f0}{get\+\_\+\+MS\+\_\+\+DOS\+\_\+\+HEADER\+\_\+\+BUFFER}} () const
+\begin{DoxyCompactList}\small\item\em Returns the MS-\/\+DOS header buffer. \end{DoxyCompactList}\item 
+std\+::vector$<$ unsigned char $>$ \mbox{\hyperlink{class_signature_a97711184a9117cdb06644b347a8ac75e}{get\+\_\+\+PE\+\_\+\+HEADER\+\_\+\+BUFFER}} () const
+\begin{DoxyCompactList}\small\item\em Returns the PE header buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -40,14 +44,19 @@ A class for reading the headers of a Windows executable and calculating its SHA2
 
 
 
-Constructs a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file. 
+Constructor which takes a file name as an argument and opens the file in binary mode. The constructor reads the MS-\/\+DOS header and PE header of the file. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & The path of the file to be read.\\
+{\em filename} & The name of the file to open.\\
 \hline
 \end{DoxyParams}
-This constructor creates a new \mbox{\hyperlink{class_signature}{Signature}} object for the given file and reads PE and MS\+\_\+\+DOS headers of file. \mbox{\Hypertarget{class_signature_ad0bb12039b385e4600dddc7d703f52fb}\label{class_signature_ad0bb12039b385e4600dddc7d703f52fb}} 
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::ifstream\+::failure} & If the file cannot be opened. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_signature_ad0bb12039b385e4600dddc7d703f52fb}\label{class_signature_ad0bb12039b385e4600dddc7d703f52fb}} 
 \index{Signature@{Signature}!````~Signature@{$\sim$Signature}}
 \index{````~Signature@{$\sim$Signature}!Signature@{Signature}}
 \doxysubsubsection{\texorpdfstring{$\sim$Signature()}{~Signature()}}
@@ -68,10 +77,30 @@ This destructor destroys the \mbox{\hyperlink{class_signature}{Signature}} objec
 
 
 
-Calculates the SHA256 hash value of the file. 
+Returns the SHA256 hash of the {\ttfamily .text} section of the file. 
+
+The method uses the \mbox{\hyperlink{class_signature_a8881448fcd549267f338a61957196dde}{sum\+\_\+up\+\_\+bytes()}} function to compute the size and offset of the raw data of the {\ttfamily .text} section, and then reads the raw data and computes its hash using the sha256() function.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::ifstream\+::failure} & If the file cannot be read.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+The SHA256 hash of the {\ttfamily .text} section of the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_a269fe4069b8a97612228b07baa17d3f0}\label{class_signature_a269fe4069b8a97612228b07baa17d3f0}} 
+\index{Signature@{Signature}!get\_MS\_DOS\_HEADER\_BUFFER@{get\_MS\_DOS\_HEADER\_BUFFER}}
+\index{get\_MS\_DOS\_HEADER\_BUFFER@{get\_MS\_DOS\_HEADER\_BUFFER}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_MS\_DOS\_HEADER\_BUFFER()}{get\_MS\_DOS\_HEADER\_BUFFER()}}
+{\footnotesize\ttfamily std\+::vector$<$ unsigned char $>$ Signature\+::get\+\_\+\+MS\+\_\+\+DOS\+\_\+\+HEADER\+\_\+\+BUFFER (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the MS-\/\+DOS header buffer. 
 
 \begin{DoxyReturn}{Returns}
-The SHA256 hash value of the file. 
+The MS-\/\+DOS header buffer. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_signature_af9c9d17beeaa1305e666b469b193248f}\label{class_signature_af9c9d17beeaa1305e666b469b193248f}} 
 \index{Signature@{Signature}!get\_number\_of\_sections@{get\_number\_of\_sections}}
@@ -85,6 +114,19 @@ Returns the number of sections in the headers of the file.
 
 \begin{DoxyReturn}{Returns}
 The number of sections in the headers of the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_signature_a97711184a9117cdb06644b347a8ac75e}\label{class_signature_a97711184a9117cdb06644b347a8ac75e}} 
+\index{Signature@{Signature}!get\_PE\_HEADER\_BUFFER@{get\_PE\_HEADER\_BUFFER}}
+\index{get\_PE\_HEADER\_BUFFER@{get\_PE\_HEADER\_BUFFER}!Signature@{Signature}}
+\doxysubsubsection{\texorpdfstring{get\_PE\_HEADER\_BUFFER()}{get\_PE\_HEADER\_BUFFER()}}
+{\footnotesize\ttfamily std\+::vector$<$ unsigned char $>$ Signature\+::get\+\_\+\+PE\+\_\+\+HEADER\+\_\+\+BUFFER (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the PE header buffer. 
+
+\begin{DoxyReturn}{Returns}
+The PE header buffer. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_signature_a114a817dedf1412b461d9fe4ec9752e0}\label{class_signature_a114a817dedf1412b461d9fe4ec9752e0}} 
 \index{Signature@{Signature}!get\_PE\_offset@{get\_PE\_offset}}
@@ -112,25 +154,32 @@ Returns the offset of the section headers in the file.
 \begin{DoxyReturn}{Returns}
 The offset of the section headers in the file. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}\label{class_signature_a3f0a1c69240d893e8c3db0d651c2cf3c}} 
+\mbox{\Hypertarget{class_signature_a8881448fcd549267f338a61957196dde}\label{class_signature_a8881448fcd549267f338a61957196dde}} 
 \index{Signature@{Signature}!sum\_up\_bytes@{sum\_up\_bytes}}
 \index{sum\_up\_bytes@{sum\_up\_bytes}!Signature@{Signature}}
 \doxysubsubsection{\texorpdfstring{sum\_up\_bytes()}{sum\_up\_bytes()}}
-{\footnotesize\ttfamily int Signature\+::sum\+\_\+up\+\_\+bytes (\begin{DoxyParamCaption}\item[{unsigned short}]{size,  }\item[{int}]{pos = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily long int Signature\+::sum\+\_\+up\+\_\+bytes (\begin{DoxyParamCaption}\item[{unsigned short}]{size,  }\item[{int}]{pos = {\ttfamily -\/1} }\end{DoxyParamCaption})}
 
 
 
-Sums up the bytes of the file starting from the given position. 
+Reads the specified number of bytes from the file at the given position, and returns the sum of the bytes computed as an integer. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em size} & The number of the bytes to sum up. \\
+{\em size} & The number of bytes to read. \\
 \hline
-{\em pos} & The position to start summing up from. \\
+{\em pos} & The position in the file to start reading from.\\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If the size parameter is greater than 4. \\
+\hline
+{\em std\+::ifstream\+::failure} & If the file cannot be read.\\
+\hline
+\end{DoxyExceptions}
 \begin{DoxyReturn}{Returns}
-The sum of the bytes. 
+The sum of the bytes computed as an integer. 
 \end{DoxyReturn}
 
 

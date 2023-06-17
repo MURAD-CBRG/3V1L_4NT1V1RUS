@@ -13,7 +13,7 @@
 \DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QThread>}}
 \DoxyCodeLine{11 }
 \DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}signature.h"{}}}
-\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}db\_manager/database\_api.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}database\_api.h"{}}}
 \DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}conf.h"{}}}
 \DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}analizerseparated.h"{}}}
 \DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}dir\_reader.h"{}}}
@@ -21,50 +21,52 @@
 \DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}configuredialog.h"{}}}
 \DoxyCodeLine{19 }
 \DoxyCodeLine{20 QT\_BEGIN\_NAMESPACE}
-\DoxyCodeLine{21 \textcolor{keyword}{namespace }Ui \{ \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}}; \}}
-\DoxyCodeLine{22 QT\_END\_NAMESPACE}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24 \textcolor{keyword}{class }QSystemTrayIcon;}
-\DoxyCodeLine{25 }
-\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}} : \textcolor{keyword}{public} QMainWindow}
-\DoxyCodeLine{35 \{}
-\DoxyCodeLine{36     Q\_OBJECT}
-\DoxyCodeLine{37 }
-\DoxyCodeLine{38 \textcolor{keyword}{public}:}
-\DoxyCodeLine{44     \mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{45 }
-\DoxyCodeLine{51     \mbox{\hyperlink{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}{\string~AntivirusWindow}}();}
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53 \textcolor{keyword}{protected}:}
-\DoxyCodeLine{60     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}{closeEvent}}(QCloseEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}{changeEvent}}(QEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{69 }
-\DoxyCodeLine{70 \textcolor{keyword}{private} slots:}
-\DoxyCodeLine{78     \textcolor{keywordtype}{void} on\_checkDirButton\_clicked();}
-\DoxyCodeLine{79 }
-\DoxyCodeLine{85     \textcolor{keywordtype}{void} on\_actionExit\_triggered();}
-\DoxyCodeLine{86 }
-\DoxyCodeLine{94     \textcolor{keywordtype}{void} on\_checkFileButton\_clicked();}
-\DoxyCodeLine{95 }
-\DoxyCodeLine{102     \textcolor{keywordtype}{void} on\_browseFileButton\_clicked();}
-\DoxyCodeLine{103 }
-\DoxyCodeLine{104 }
-\DoxyCodeLine{111     \textcolor{keywordtype}{void} on\_browseDirectoryButton\_clicked();}
-\DoxyCodeLine{112 }
-\DoxyCodeLine{118     \textcolor{keywordtype}{void} on\_actionNew\_Signature\_triggered();}
-\DoxyCodeLine{119 }
-\DoxyCodeLine{125     \textcolor{keywordtype}{void} trayIconActivated(QSystemTrayIcon::ActivationReason reason);}
-\DoxyCodeLine{126 }
-\DoxyCodeLine{133     \textcolor{keywordtype}{void} on\_actionSettings\_triggered();}
-\DoxyCodeLine{134 }
-\DoxyCodeLine{142     \textcolor{keywordtype}{void} autocheck\_on();}
-\DoxyCodeLine{143 }
-\DoxyCodeLine{144 \textcolor{keyword}{private}:}
-\DoxyCodeLine{145     Ui::AntivirusWindow *ui; }
-\DoxyCodeLine{146     QSystemTrayIcon *mySysTrayIcon; }
-\DoxyCodeLine{147     QThread* autoanalyzerThread; }
-\DoxyCodeLine{148 \};}
-\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ANTIVIRUSWINDOW\_H}}
+\DoxyCodeLine{21 \textcolor{keyword}{namespace }Ui}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23     \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}};}
+\DoxyCodeLine{24 \}}
+\DoxyCodeLine{25 QT\_END\_NAMESPACE}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{class }QSystemTrayIcon;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{37 \textcolor{keyword}{class }\mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}} : \textcolor{keyword}{public} QMainWindow}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     Q\_OBJECT}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_antivirus_window}{AntivirusWindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{54     \mbox{\hyperlink{class_antivirus_window_a77fe4eb0a0770c405f092fc4d5366785}{\string~AntivirusWindow}}();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_aa432d93b78a06a257903cc7b96f43ddf}{closeEvent}}(QCloseEvent *event) \textcolor{keyword}{override};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_antivirus_window_a259787d9f6da04f3b602799915fa3442}{changeEvent}}(QEvent *event) \textcolor{keyword}{override};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} on\_checkDirButton\_clicked();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} on\_actionExit\_triggered();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} on\_checkFileButton\_clicked();}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} on\_browseFileButton\_clicked();}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} on\_browseDirectoryButton\_clicked();}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} on\_actionNew\_Signature\_triggered();}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} trayIconActivated(QSystemTrayIcon::ActivationReason reason);}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} on\_actionSettings\_triggered();}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{144     \textcolor{keywordtype}{void} autocheck\_on();}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{keyword}{private}:}
+\DoxyCodeLine{147     Ui::AntivirusWindow *ui;        }
+\DoxyCodeLine{148     QSystemTrayIcon *mySysTrayIcon; }
+\DoxyCodeLine{149     QThread *autoanalyzerThread;    }
+\DoxyCodeLine{150 \};}
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ANTIVIRUSWINDOW\_H}}
 
 \end{DoxyCode}

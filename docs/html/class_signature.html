@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('class_signature.html',''); initResizab
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a076653a1d82cf7a436c20d966247fc3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#a076653a1d82cf7a436c20d966247fc3e">Signature</a> (std::string filename)</td></tr>
-<tr class="memdesc:a076653a1d82cf7a436c20d966247fc3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="class_signature.html" title="A class for reading the headers of a Windows executable and calculating its SHA256 hash value.">Signature</a> object for the given file.  <a href="class_signature.html#a076653a1d82cf7a436c20d966247fc3e">More...</a><br /></td></tr>
+<tr class="memdesc:a076653a1d82cf7a436c20d966247fc3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which takes a file name as an argument and opens the file in binary mode. The constructor reads the MS-DOS header and PE header of the file.  <a href="class_signature.html#a076653a1d82cf7a436c20d966247fc3e">More...</a><br /></td></tr>
 <tr class="separator:a076653a1d82cf7a436c20d966247fc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0bb12039b385e4600dddc7d703f52fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#ad0bb12039b385e4600dddc7d703f52fb">~Signature</a> ()</td></tr>
 <tr class="memdesc:ad0bb12039b385e4600dddc7d703f52fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="class_signature.html" title="A class for reading the headers of a Windows executable and calculating its SHA256 hash value.">Signature</a> object and closes the file.  <a href="class_signature.html#ad0bb12039b385e4600dddc7d703f52fb">More...</a><br /></td></tr>
@@ -119,12 +119,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af9c9d17beeaa1305e666b469b193248f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#af9c9d17beeaa1305e666b469b193248f">get_number_of_sections</a> ()</td></tr>
 <tr class="memdesc:af9c9d17beeaa1305e666b469b193248f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of sections in the headers of the file.  <a href="class_signature.html#af9c9d17beeaa1305e666b469b193248f">More...</a><br /></td></tr>
 <tr class="separator:af9c9d17beeaa1305e666b469b193248f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f0a1c69240d893e8c3db0d651c2cf3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#a3f0a1c69240d893e8c3db0d651c2cf3c">sum_up_bytes</a> (unsigned short size, int pos)</td></tr>
-<tr class="memdesc:a3f0a1c69240d893e8c3db0d651c2cf3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sums up the bytes of the file starting from the given position.  <a href="class_signature.html#a3f0a1c69240d893e8c3db0d651c2cf3c">More...</a><br /></td></tr>
-<tr class="separator:a3f0a1c69240d893e8c3db0d651c2cf3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8881448fcd549267f338a61957196dde"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#a8881448fcd549267f338a61957196dde">sum_up_bytes</a> (unsigned short size, int pos=-1)</td></tr>
+<tr class="memdesc:a8881448fcd549267f338a61957196dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the specified number of bytes from the file at the given position, and returns the sum of the bytes computed as an integer.  <a href="class_signature.html#a8881448fcd549267f338a61957196dde">More...</a><br /></td></tr>
+<tr class="separator:a8881448fcd549267f338a61957196dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae6fd692e7618d91b75973d947f5193"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#afae6fd692e7618d91b75973d947f5193">get_hash</a> ()</td></tr>
-<tr class="memdesc:afae6fd692e7618d91b75973d947f5193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the SHA256 hash value of the file.  <a href="class_signature.html#afae6fd692e7618d91b75973d947f5193">More...</a><br /></td></tr>
+<tr class="memdesc:afae6fd692e7618d91b75973d947f5193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the SHA256 hash of the <code>.text</code> section of the file.  <a href="class_signature.html#afae6fd692e7618d91b75973d947f5193">More...</a><br /></td></tr>
 <tr class="separator:afae6fd692e7618d91b75973d947f5193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269fe4069b8a97612228b07baa17d3f0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#a269fe4069b8a97612228b07baa17d3f0">get_MS_DOS_HEADER_BUFFER</a> () const</td></tr>
+<tr class="memdesc:a269fe4069b8a97612228b07baa17d3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the MS-DOS header buffer.  <a href="class_signature.html#a269fe4069b8a97612228b07baa17d3f0">More...</a><br /></td></tr>
+<tr class="separator:a269fe4069b8a97612228b07baa17d3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97711184a9117cdb06644b347a8ac75e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_signature.html#a97711184a9117cdb06644b347a8ac75e">get_PE_HEADER_BUFFER</a> () const</td></tr>
+<tr class="memdesc:a97711184a9117cdb06644b347a8ac75e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the PE header buffer.  <a href="class_signature.html#a97711184a9117cdb06644b347a8ac75e">More...</a><br /></td></tr>
+<tr class="separator:a97711184a9117cdb06644b347a8ac75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A class for reading the headers of a Windows executable and calculating its SHA256 hash value. </p>
@@ -145,14 +151,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="class_signature.html" title="A class for reading the headers of a Windows executable and calculating its SHA256 hash value.">Signature</a> object for the given file. </p>
+<p>Constructor which takes a file name as an argument and opens the file in binary mode. The constructor reads the MS-DOS header and PE header of the file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>The path of the file to be read.</td></tr>
+    <tr><td class="paramname">filename</td><td>The name of the file to open.</td></tr>
   </table>
   </dd>
 </dl>
-<p>This constructor creates a new <a class="el" href="class_signature.html" title="A class for reading the headers of a Windows executable and calculating its SHA256 hash value.">Signature</a> object for the given file and reads PE and MS_DOS headers of file. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::ifstream::failure</td><td>If the file cannot be opened. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -192,8 +203,35 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculates the SHA256 hash value of the file. </p>
-<dl class="section return"><dt>Returns</dt><dd>The SHA256 hash value of the file. </dd></dl>
+<p>Returns the SHA256 hash of the <code>.text</code> section of the file. </p>
+<p >The method uses the <a class="el" href="class_signature.html#a8881448fcd549267f338a61957196dde" title="Reads the specified number of bytes from the file at the given position, and returns the sum of the b...">sum_up_bytes()</a> function to compute the size and offset of the raw data of the <code>.text</code> section, and then reads the raw data and computes its hash using the sha256() function.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::ifstream::failure</td><td>If the file cannot be read.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The SHA256 hash of the <code>.text</code> section of the file. </dd></dl>
+
+</div>
+</div>
+<a id="a269fe4069b8a97612228b07baa17d3f0" name="a269fe4069b8a97612228b07baa17d3f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269fe4069b8a97612228b07baa17d3f0">&#9670;&#160;</a></span>get_MS_DOS_HEADER_BUFFER()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; unsigned char &gt; Signature::get_MS_DOS_HEADER_BUFFER </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the MS-DOS header buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>The MS-DOS header buffer. </dd></dl>
 
 </div>
 </div>
@@ -214,6 +252,26 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the number of sections in the headers of the file. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of sections in the headers of the file. </dd></dl>
+
+</div>
+</div>
+<a id="a97711184a9117cdb06644b347a8ac75e" name="a97711184a9117cdb06644b347a8ac75e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97711184a9117cdb06644b347a8ac75e">&#9670;&#160;</a></span>get_PE_HEADER_BUFFER()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; unsigned char &gt; Signature::get_PE_HEADER_BUFFER </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the PE header buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>The PE header buffer. </dd></dl>
 
 </div>
 </div>
@@ -257,14 +315,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f0a1c69240d893e8c3db0d651c2cf3c" name="a3f0a1c69240d893e8c3db0d651c2cf3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f0a1c69240d893e8c3db0d651c2cf3c">&#9670;&#160;</a></span>sum_up_bytes()</h2>
+<a id="a8881448fcd549267f338a61957196dde" name="a8881448fcd549267f338a61957196dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8881448fcd549267f338a61957196dde">&#9670;&#160;</a></span>sum_up_bytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Signature::sum_up_bytes </td>
+          <td class="memname">long int Signature::sum_up_bytes </td>
           <td>(</td>
           <td class="paramtype">unsigned short&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -283,15 +341,22 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sums up the bytes of the file starting from the given position. </p>
+<p>Reads the specified number of bytes from the file at the given position, and returns the sum of the bytes computed as an integer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">size</td><td>The number of the bytes to sum up. </td></tr>
-    <tr><td class="paramname">pos</td><td>The position to start summing up from. </td></tr>
+    <tr><td class="paramname">size</td><td>The number of bytes to read. </td></tr>
+    <tr><td class="paramname">pos</td><td>The position in the file to start reading from.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The sum of the bytes. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>If the size parameter is greater than 4. </td></tr>
+    <tr><td class="paramname">std::ifstream::failure</td><td>If the file cannot be read.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The sum of the bytes computed as an integer. </dd></dl>
 
 </div>
 </div>
