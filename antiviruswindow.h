@@ -8,6 +8,7 @@
 #include <QMenu>
 #include <QFileDialog>
 #include <QThread>
+#include <filesystem>
 
 #include "signature.h"
 #include "database_api.h"

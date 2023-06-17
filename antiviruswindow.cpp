@@ -54,8 +54,11 @@ void AntivirusWindow::on_checkFileButton_clicked()
         Signature sig1{filename.toStdString()};
         std::string sig_hash = sig1.get_hash();
         QMessageBox::information(this, "Hash", tr("The hash is ") + tr(sig_hash.c_str()));
-        if (database_control(sig_hash, "FIND"))
+        if (database_control(sig_hash, "FIND")){
             textEdit->append(tr("<font color=\"red\">This file is a virus ") + filename + tr("</font>"));
+            // std::filesystem::path p(filename.toStdString());
+            // std::filesystem::remove(p);
+        }
         else
             textEdit->append(QString::fromStdString("<font color=\"black\">This file is clear: " +
                                                     filename.toStdString() + "</font>"));
