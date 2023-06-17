@@ -18,7 +18,10 @@
 #include "configuredialog.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class AntivirusWindow; }
+namespace Ui
+{
+    class AntivirusWindow;
+}
 QT_END_NAMESPACE
 
 class QSystemTrayIcon;
@@ -57,7 +60,7 @@ protected:
      * This function is called when the main window is closed. If the system tray icon is visible, it hides
      * the main window instead of closing it.
      */
-    void closeEvent(QCloseEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
 
     /**
      * \brief Overridden function for handling change events.
@@ -65,7 +68,7 @@ protected:
      * This function is called when the main window changes state, such as when it is minimized or restored.
      * If the main window is minimized, it hides the window instead of minimizing it.
      */
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     /**
@@ -100,7 +103,6 @@ private slots:
      * Once a file is selected, the file path is displayed in the "filenameLine" QLineEdit object in the user interface.
      */
     void on_browseFileButton_clicked();
-
 
     /**
      * \brief Function for opening a file dialog to choose a directory to check.
@@ -142,8 +144,8 @@ private slots:
     void autocheck_on();
 
 private:
-    Ui::AntivirusWindow *ui; /**< The user interface for the antivirus application. */
+    Ui::AntivirusWindow *ui;        /**< The user interface for the antivirus application. */
     QSystemTrayIcon *mySysTrayIcon; /**< The system tray icon for the antivirus application. */
-    QThread* autoanalyzerThread; /**< The QThread object for the automatic analysis. */
+    QThread *autoanalyzerThread;    /**< The QThread object for the automatic analysis. */
 };
 #endif // ANTIVIRUSWINDOW_H

@@ -9,9 +9,10 @@
 /**
  * \brief The configuration for automatic analysis.
  */
-struct ConfigurationAnalyse {
-    bool work_flag; /**< Indicator if automatic analysis is enabled or not. */
-    int time_interval; /**< The time interval between automatic analyses in seconds. */
+struct ConfigurationAnalyse
+{
+    bool work_flag;                    /**< Indicator if automatic analysis is enabled or not. */
+    int time_interval;                 /**< The time interval between automatic analyses in seconds. */
     std::vector<std::string> baseDirs; /**< A vector of strings representing the directories to be included in the automatic analysis. */
 };
 
@@ -29,7 +30,7 @@ ConfigurationAnalyse getConfigurationForAnalysis();
  * \brief Writes the configuration for automatic analysis to a file.
  * \param conf The configuration for automatic analysis.
  *
- * This function takes a ConfigurationAnalyse struct as an argument and writes the values 
+ * This function takes a ConfigurationAnalyse struct as an argument and writes the values
  * to a file called "conf_analyse.conf".
  */
 void setConfigurationAnalysis(ConfigurationAnalyse conf);

@@ -12,12 +12,11 @@
  * \param argv An array of pointers to strings containing the values for each column in the result set.
  * \param azColName An array of pointers to strings containing the names of each column in the result set.
  * \return Always returns 0.
- * 
+ *
  * This function is used as a callback for the `sqlite3_exec` function to process the results of a
  * SQLite3 query. It sets a boolean flag to true when called.
  */
-static int callback(void* NotUsed, int argc, char** argv, char** azColName);
-
+static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
 /**
  * \brief Interacts with a SQLite3 database to perform common operations.

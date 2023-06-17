@@ -8,8 +8,9 @@
 #include "database_api.h"
 #include "signature.h"
 
-namespace Ui {
-class addFIleToDBDialog;
+namespace Ui
+{
+    class addFIleToDBDialog;
 }
 
 /**

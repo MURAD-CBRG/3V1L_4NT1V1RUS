@@ -1,31 +1,33 @@
 #include "configuredialog.h"
 #include "ui_configuredialog.h"
 
-configureDialog::configureDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::configureDialog)
+configureDialog::configureDialog(QWidget *parent) : QDialog(parent),
+                                                    ui(new Ui::configureDialog)
 {
     ui->setupUi(this);
 
-    dirsEdit = findChild<QPlainTextEdit*>("dirsTextEdit");
-    isonCheckbox = findChild<QCheckBox*>("isonCheckbox");
-    timeintervalEdit = findChild<QSpinBox*>("timeintervalEdit");
+    dirsEdit = findChild<QPlainTextEdit *>("dirsTextEdit");
+    isonCheckbox = findChild<QCheckBox *>("isonCheckbox");
+    timeintervalEdit = findChild<QSpinBox *>("timeintervalEdit");
 
-    try{
+    try
+    {
         ConfigurationAnalyse conf = getConfigurationForAnalysis();
         isonCheckbox->setChecked(conf.work_flag);
         timeintervalEdit->setValue(conf.time_interval);
         std::string result = std::accumulate(conf.baseDirs.begin(), conf.baseDirs.end(), std::string(),
-                                               [](const std::string& a, const std::string& b) -> std::string {
-                                                   return a.empty() ? b : a + "\n" + b;
-                                               });
+                                             [](const std::string &a, const std::string &b) -> std::string
+                                             {
+                                                 return a.empty() ? b : a + "\n" + b;
+                                             });
         dirsEdit->setPlainText(QString::fromStdString(result));
     }
-    catch(std::ofstream::failure){
+    catch (std::ofstream::failure)
+    {
         QMessageBox::critical(this, "Error!", "Failed to read config file!");
     }
 
-    QPushButton* cancelButton = findChild<QPushButton*>("cancelButton");
+    QPushButton *cancelButton = findChild<QPushButton *>("cancelButton");
     connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 }
 
@@ -46,11 +48,13 @@ void configureDialog::on_saveButton_clicked()
     while (std::getline(iss, line))
         dirs.push_back(line);
     ConfigurationAnalyse conf{mode, interval, dirs};
-    try{
+    try
+    {
         setConfigurationAnalysis(conf);
         accept();
     }
-    catch(std::ofstream::failure){
+    catch (std::ofstream::failure)
+    {
         QMessageBox::critical(this, "Error!", "Failed to create config file!");
         reject();
     }

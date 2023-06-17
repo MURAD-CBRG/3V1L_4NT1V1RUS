@@ -18,7 +18,7 @@
  * an interval in seconds at which to perform the analysis, a vector of directory paths to analyze,
  * and a pointer to a QTextEdit widget to display the results of the analysis.
  */
-class analizerSeparated : public QObject  // EXAMPLE OF THREAD
+class analizerSeparated : public QObject 
 {
 public:
     /**
@@ -31,7 +31,7 @@ public:
      */
     explicit analizerSeparated(int interval_in_seconds,
                                std::vector<std::string> dirs,
-                               QTextEdit* redactor);
+                               QTextEdit *redactor);
 
     /**
      * \brief Function for running the analysis in a separate thread.
@@ -42,10 +42,9 @@ public:
     void analize_for_intervals();
 
 private:
-    int interval_seconds; /**< The interval in seconds at which to perform the analysis. */
+    int interval_seconds;          /**< The interval in seconds at which to perform the analysis. */
     std::vector<std::string> dirs; /**< An array of directory paths to analyze. */
-    QTextEdit* redactor; /**< QTextEdit to display the results of the analysis. */
+    QTextEdit *redactor;           /**< QTextEdit to display the results of the analysis. */
 };
-
 
 #endif // ANALIZERSEPARATED_H

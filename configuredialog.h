@@ -12,8 +12,9 @@
 
 #include "conf.h"
 
-namespace Ui {
-class configureDialog;
+namespace Ui
+{
+    class configureDialog;
 }
 
 /**
@@ -52,10 +53,10 @@ private slots:
     void on_saveButton_clicked();
 
 private:
-    Ui::configureDialog *ui; /**< The user interface for the configureDialog object. */
-    QPlainTextEdit* dirsEdit; /**< The QPlainTextEdit widget for entering the directories to be included in the automatic analysis. */
-    QCheckBox* isonCheckbox; /**< The QCheckBox widget for enabling or disabling automatic analysis. */
-    QSpinBox* timeintervalEdit; /**< The QSpinBox widget for setting the time interval between automatic analyses. */
+    Ui::configureDialog *ui;    /**< The user interface for the configureDialog object. */
+    QPlainTextEdit *dirsEdit;   /**< The QPlainTextEdit widget for entering the directories to be included in the automatic analysis. */
+    QCheckBox *isonCheckbox;    /**< The QCheckBox widget for enabling or disabling automatic analysis. */
+    QSpinBox *timeintervalEdit; /**< The QSpinBox widget for setting the time interval between automatic analyses. */
 };
 
 #endif // CONFIGUREDIALOG_H

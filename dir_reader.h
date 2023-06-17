@@ -9,12 +9,14 @@
 #include "bypass.h"
 
 /**
- * \brief Reads a directory and its subdirectories and checks the files for virus signatures.
- * \param dir The path of the directory to be read.
- * \param redactor A pointer to a QTextEdit widget where the results of the scan will be displayed.
+ * \brief Reads the files in the specified directory, computes their SHA256 hash using the Signature class, and writes a message to a QTextEdit widget indicating whether each file is a virus or not.
  *
- * This function takes a directory path and a QTextEdit widget as input. It reads the directory and its subdirectories,
- * and checks each file for malware signatures. If a signature is found, it is displayed in the QTextEdit widget.
+ * \param dir The path to the directory to read.
+ * \param redactor A pointer to a QTextEdit widget where log messages will be written.
+ *
+ * \throws std::ifstream::failure If a file in the directory cannot be read.
+ * \throws std::invalid_argument If a file in the directory is not an executable file.
+ * \throws std::filesystem::__cxx11::filesystem_error If the directory does not exist.
  */
 void read_dir(std::string dir, QTextEdit* redactor);
 
